@@ -1,0 +1,55 @@
+Experience
+Stanford Law School logo
+AI Technical Lead
+
+Stanford Law School · Full-time
+
+Jun 2025 - Present · 1 yr 1 mo
+
+Stanford, California, United States
+
+Leading the adoption of AI tooling and agentic workflows, as well as the design, prototyping, and deployment of AI-powered applications at Stanford Legal Design Lab. Working with Research Assistants and cross-functional stakeholders across legal and technical workflows. Focus areas include agentic AI systems, RAG pipelines, document intelligence, PII detection and redaction, LLM customization and integration, and applied machine learning.
+
+AI Technical Assistant for LAW 809E (AI for Legal Help), providing technical guidance on AI applications in legal workflows and translating engineering concepts into practical instruction for Stanford students.
+
+Stanford Continuing Studies logo
+Instructor
+
+Stanford Continuing Studies · Part-time
+
+Jan 2026 - Present · 6 mos
+
+Stanford, California, United States
+
+Instructor - Supervising AI Coding Agents (TECH 43, CSP), teaching professionals how to evaluate, manage, and safely supervise autonomous software-development tools. The course emphasizes practical governance, workflow design, and responsible use of agentic coding systems.
+
+Stanford University Graduate School of Business logo
+Research Affiliate
+
+Stanford University Graduate School of Business
+
+Jan 2024 - Present · 2 yrs 6 mos
+
+Stanford, California, United States
+
+Research Affiliate at the Stanford Value Chain Innovation Initiative (VCII), conducting research with Professor Haim Mendelson on LLM performance, pricing dynamics, and market evolution to develop an analytical framework for evaluating model quality-cost tradeoffs over time.
+
+NocoDB logo
+Founding Angel Investor, Advisor
+
+NocoDB
+
+Dec 2021 - Present · 4 yrs 7 mos
+
+Founding angel investor and advisor for NocoDB, a leading open-source smart-database platform. Helped to shape the product's initial functionality, was actively involved in fundraising, successfully securing $10.5M in a seed round in 2022. Now, NocoDB is the TOP-3 open-source project, trusted by 6,500+ organizations, including Fortune 500 companies.
+
+PT Amman Mineral Nusa Tenggara logo
+AI Project Lead
+
+PT Amman Mineral Nusa Tenggara · Full-time
+
+May 2024 - Apr 2025 · 1 yr
+
+Palo Alto, California, United States
+
+Working on an AI and Digital Transformation program in collaboration with McKinsey and FTI Consulting to drive innovation and operational efficiency in its mining operations.
