@@ -37,13 +37,13 @@ export function Hero() {
           </motion.div>
           
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.1]"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <span className="block text-foreground drop-shadow-sm">Fractional</span>
-            <span className="block text-primary/90 drop-shadow-sm">AI Leadership</span>
+            <span className="block text-foreground drop-shadow-sm">Fractional AI Lead</span>
+            <span className="block text-primary/90 drop-shadow-sm">&amp; AI Adoption Services</span>
           </motion.h1>
           
           <motion.p 
