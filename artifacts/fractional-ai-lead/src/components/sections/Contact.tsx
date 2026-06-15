@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Calendar, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight } from "lucide-react";
 
 export function Contact() {
-  const [emailRevealed, setEmailRevealed] = useState(false);
 
   return (
     <section id="contact" className="py-24 bg-slate-950">
@@ -32,42 +30,6 @@ export function Contact() {
               <ArrowRight className="ml-3 h-5 w-5" />
             </a>
 
-            <div className="border-t border-slate-800 pt-10">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-
-                {/* LinkedIn — highlighted */}
-                <a
-                  href="https://www.linkedin.com/in/rakivnenkov"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 bg-[#0A66C2] text-white hover:bg-[#0958a8] h-12 px-6 w-full sm:w-auto"
-                >
-                  <Linkedin className="mr-2 h-4 w-4" />
-                  LinkedIn
-                </a>
-
-                {/* Email — reveal on hover/click */}
-                {emailRevealed ? (
-                  <a
-                    href="mailto:vasyl@stanford.edu"
-                    className="inline-flex items-center justify-center rounded-md text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 border border-slate-600 text-slate-200 hover:bg-slate-800 h-12 px-6 w-full sm:w-auto"
-                  >
-                    <Mail className="mr-2 h-4 w-4 shrink-0" />
-                    vasyl@stanford.edu
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => setEmailRevealed(true)}
-                    onMouseEnter={() => setEmailRevealed(true)}
-                    className="inline-flex items-center justify-center rounded-md text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 border border-slate-700 text-slate-400 hover:border-slate-600 hover:text-slate-200 h-12 px-6 w-full sm:w-auto"
-                  >
-                    <Mail className="mr-2 h-4 w-4" />
-                    E-mail
-                  </button>
-                )}
-
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
