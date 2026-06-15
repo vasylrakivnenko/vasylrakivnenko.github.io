@@ -20,7 +20,7 @@ const photos = [
 const stanfordRoles = [
   {
     title: "AI Technical Lead",
-    org: "Stanford Law School — Legal Design Lab",
+    org: "Stanford Law School — IT, Legal Design Lab",
     detail: "Agentic AI systems, RAG pipelines, document intelligence, PII detection & redaction, LLM customization, and applied ML. Also AI Technical Assistant for LAW 809E (AI for Legal Help).",
   },
   {
