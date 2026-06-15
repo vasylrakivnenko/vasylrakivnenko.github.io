@@ -81,9 +81,7 @@ export function Credentials() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
             <div className="max-w-3xl text-lg text-muted-foreground leading-relaxed space-y-4">
-              <p>
-                A deliberately non-linear path — from driving CDL trucks to building companies past $10M in sales, to working at the intersection of AI and some of the most rigorous institutions in the world. Each chapter taught something the previous one could not.
-              </p>
+              <p>From in production and driving CDL trucks to building a company with $10M in sales, to working at the intersection of AI and some of the most rigorous institutions in the world.</p>
               <p>
                 I believe the best AI work comes from people who understand both the technology and the human systems around it. That means staying curious, staying honest about what AI can and cannot do, and building things that are genuinely useful.
               </p>
