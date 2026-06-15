@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import stanfordLogo from "@assets/Screenshot_2026-06-15_at_11.55.46_AM_1781549748396.png";
 import teachingImg from "@assets/Teaching_AI_at_Stanford_CSP_1781543611704.jpg";
 import gsbImg from "@assets/Speaking_at_Stanford_GSB_1781543654823.jpg";
 import unlvImg from "@assets/Speaking_at_University_of_Nevada_Las_Vegas_(UNLV)_1781543835166.png";
@@ -100,12 +101,11 @@ export function Credentials() {
             {/* Stanford header bar */}
             <div className="flex items-center gap-4 px-8 py-5 border-b border-border bg-[#8C1515]/5">
               <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-black text-xl shrink-0"
-                  style={{ backgroundColor: "#8C1515" }}
-                >
-                  S
-                </div>
+                <img
+                  src={stanfordLogo}
+                  alt="Stanford University"
+                  className="w-10 h-10 rounded-full shrink-0 object-cover"
+                />
                 <div>
                   <p className="font-bold text-lg leading-tight" style={{ color: "#8C1515" }}>Stanford University</p>
                   <p className="text-xs text-muted-foreground font-medium">Three concurrent roles</p>
