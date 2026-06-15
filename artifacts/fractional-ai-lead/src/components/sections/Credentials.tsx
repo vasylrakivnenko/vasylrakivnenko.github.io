@@ -152,7 +152,7 @@ export function Credentials() {
               {[
                 {
                   name: "Haim Mendelson",
-                  title: "Kleiner Perkins Caufield & Byers Professor of Electronic Business and Commerce and Management",
+                  title: "Professor of Electronic Business and Commerce and Management",
                   org: "Stanford Graduate School of Business",
                 },
                 {
