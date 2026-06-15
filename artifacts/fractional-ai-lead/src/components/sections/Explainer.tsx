@@ -17,9 +17,7 @@ export function Explainer() {
               <p>
                 A savvy business solution where expertise meets flexibility – think of me as your internal team member with the added benefits of cost-savings and administrative ease.
               </p>
-              <p>
-                Perfect for businesses not quite ready for a full-time Chief AI Officer, this suite gives you access to top-tier AI insight and experience, tailored to fit your company's rhythm and budget.
-              </p>
+              <p>Perfect for businesses not quite ready for a full-time Chief AI Officer or AI Lead, this suite gives you access to top-tier AI insight and experience, tailored to fit your company's rhythm and budget.</p>
             </div>
           </motion.div>
         </div>
