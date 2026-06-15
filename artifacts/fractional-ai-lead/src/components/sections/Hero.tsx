@@ -4,17 +4,17 @@ import speakingImage from "@assets/1702346092406_1781039882681.jpg";
 
 export function Hero() {
   return (
-    <section className="min-h-[90vh] flex flex-col justify-center relative pt-20 overflow-hidden bg-slate-950">
+    <section className="min-h-[90vh] flex flex-col justify-center relative pt-20 overflow-hidden bg-slate-900">
       {/* Background Image with Dark Overlays */}
       <div className="absolute inset-0 z-0">
         <img
           src={speakingImage}
           alt="Fractional AI Lead Speaking"
-          className="w-full h-full object-cover object-center md:object-right-top opacity-30 mix-blend-luminosity grayscale-[30%]"
+          className="w-full h-full object-cover object-center md:object-right-top opacity-50 mix-blend-luminosity grayscale-[20%]"
         />
-        <div className="absolute inset-0 bg-slate-950/80 md:bg-slate-950/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent md:hidden" />
+        <div className="absolute inset-0 bg-slate-900/60 md:bg-slate-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent md:hidden" />
       </div>
 
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
