@@ -15,13 +15,10 @@ export function Explainer() {
             
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
-                The concept is simple: access to top-tier AI strategy and hands-on execution on a flexible, part-time basis.
+                A savvy business solution where expertise meets flexibility – think of me as your internal team member with the added benefits of cost-savings and administrative ease.
               </p>
               <p>
-                Many companies recognize that AI will fundamentally reshape their industry, but aren't ready to hire a full-time Chief AI Officer. They need senior leadership to bridge the gap between technical feasibility and business value—someone who can cut through the hype, identify high-ROI use cases, and actually build them.
-              </p>
-              <p>
-                A Fractional AI Lead embeds with your team, providing the strategic oversight of an executive and the execution capability of a seasoned engineer, tailored entirely to your current stage and budget.
+                Perfect for businesses not quite ready for a full-time Chief AI Officer, this suite gives you access to top-tier AI insight and experience, tailored to fit your company's rhythm and budget.
               </p>
             </div>
           </motion.div>
