@@ -16,9 +16,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/75 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent md:hidden" />
       </div>
-
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
-
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl">
           <motion.div
@@ -81,16 +79,14 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="flex flex-wrap items-center gap-3 text-sm text-slate-300 font-medium"
           >
+            <span className="bg-slate-900/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 shadow-sm">AI Technical Lead @ Stanford</span>
+            <span className="hidden sm:inline-block text-slate-600">•</span>
             <span className="bg-slate-900/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 shadow-sm">
-              Stanford Law AI Technical Lead
+              AI Instructor @ Stanford
             </span>
             <span className="hidden sm:inline-block text-slate-600">•</span>
             <span className="bg-slate-900/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 shadow-sm">
-              Stanford Continuing Studies Instructor
-            </span>
-            <span className="hidden sm:inline-block text-slate-600">•</span>
-            <span className="bg-slate-900/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 shadow-sm">
-              Stanford GSB Research Affiliate
+              Stanford GSB Alumni
             </span>
           </motion.div>
         </div>
