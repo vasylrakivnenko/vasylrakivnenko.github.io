@@ -151,70 +151,66 @@ export function Credentials() {
             <h3 className="text-2xl font-bold mb-8">Speaking &amp; Events</h3>
 
             <div
-              className="relative rounded-2xl overflow-hidden bg-slate-950 shadow-lg select-none"
-              style={{ aspectRatio: "16/9" }}
+              className="relative select-none"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
-              <AnimatePresence custom={direction} mode="wait">
-                <motion.img
-                  key={current}
-                  src={photos[current].src}
-                  alt={photos[current].caption}
-                  custom={direction}
-                  variants={variants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </AnimatePresence>
-
-              {/* Gradient overlay for caption */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-
-              {/* Caption */}
-              <div className="absolute bottom-0 left-0 right-0 px-6 py-5">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={current}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    <p className="text-white font-semibold text-base leading-snug">{photos[current].caption}</p>
-                    <p className="text-slate-300 text-sm mt-0.5">{photos[current].venue}</p>
-                  </motion.div>
-                </AnimatePresence>
+              {/* 3-photo strip */}
+              <div className="grid grid-cols-3 gap-4">
+                {[0, 1, 2].map((offset) => {
+                  const idx = (current + offset) % photos.length;
+                  const isFocus = offset === 1;
+                  return (
+                    <motion.div
+                      key={`${current}-${offset}`}
+                      initial={{ opacity: 0, scale: 0.97 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className={`relative rounded-xl overflow-hidden shadow-md ${isFocus ? "ring-2 ring-primary/60" : "opacity-80"}`}
+                      style={{ aspectRatio: "4/3" }}
+                    >
+                      <img
+                        src={photos[idx].src}
+                        alt={photos[idx].caption}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 px-3 py-3">
+                        <p className={`text-white font-semibold leading-snug ${isFocus ? "text-sm" : "text-xs"}`}>
+                          {photos[idx].caption}
+                        </p>
+                        <p className="text-slate-300 text-xs mt-0.5">{photos[idx].venue}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {/* Prev / Next */}
               <button
                 onClick={prev}
                 aria-label="Previous photo"
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors backdrop-blur-sm"
+                className="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-border shadow text-foreground flex items-center justify-center transition-colors hover:bg-muted z-10"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={next}
                 aria-label="Next photo"
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors backdrop-blur-sm"
+                className="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-border shadow text-foreground flex items-center justify-center transition-colors hover:bg-muted z-10"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
 
               {/* Dot indicators */}
-              <div className="absolute top-4 right-5 flex gap-1.5">
+              <div className="flex justify-center gap-1.5 mt-5">
                 {photos.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => goTo(i, i > current ? 1 : -1)}
                     aria-label={`Go to photo ${i + 1}`}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === current ? "w-5 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
+                      i === current ? "w-5 bg-primary" : "w-1.5 bg-border hover:bg-muted-foreground"
                     }`}
                   />
                 ))}

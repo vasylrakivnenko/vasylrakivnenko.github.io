@@ -3,25 +3,6 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 
 const offers = [
   {
-    title: "AI Opportunity Assessment",
-    price: "Starting at $6,000",
-    formats: [
-      "2-Day Workshop — In-person or virtual, intensive for your leadership team",
-      "4-Week Residency — Working 1:1 with 8–12 of your managers and leaders"
-    ],
-    positioning: "Discover where AI creates real value across your business, pressure-test the best ideas, and leave with a clear, prioritized blueprint your whole team believes in — technical and non-technical alike.",
-    outcomes: [
-      "AI Opportunity Blueprint (value vs. effort map)",
-      "Prioritized use cases ranked by value & feasibility",
-      "Shared language & team alignment",
-      "A grounded read on what implementation actually takes"
-    ],
-    cta: "Book a Discovery Call",
-    ctaLink: "https://calendly.com/vasyl-stanford/fractional-chief-ai-discovery-call",
-    highlight: false,
-    addOns: null
-  },
-  {
     title: "1:1 Consultation",
     price: "$300 / hour",
     formats: [
@@ -36,6 +17,25 @@ const offers = [
     ],
     cta: "Book a Session",
     ctaLink: "https://calendly.com/vasyl-stanford/1-1-session",
+    highlight: false,
+    addOns: null
+  },
+  {
+    title: "AI Opportunity Assessment",
+    price: "$6,000",
+    formats: [
+      "2-Day Workshop — In-person or virtual, intensive for your leadership team",
+      "4-Week Residency — Working 1:1 with 8–12 of your managers and leaders"
+    ],
+    positioning: "Discover where AI creates real value across your business, pressure-test the best ideas, and leave with a clear, prioritized blueprint your whole team believes in — technical and non-technical alike.",
+    outcomes: [
+      "AI Opportunity Blueprint (value vs. effort map)",
+      "Prioritized use cases ranked by value & feasibility",
+      "Shared language & team alignment",
+      "A grounded read on what implementation actually takes"
+    ],
+    cta: "Book a Discovery Call",
+    ctaLink: "https://calendly.com/vasyl-stanford/fractional-chief-ai-discovery-call",
     highlight: false,
     addOns: null
   },
@@ -112,13 +112,10 @@ export function Offers() {
                     </span>
                   ))}
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {offer.positioning}
-                </p>
               </div>
 
               <div className="flex-grow">
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-6">
                   {offer.outcomes.map((outcome, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -126,6 +123,9 @@ export function Offers() {
                     </li>
                   ))}
                 </ul>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-8">
+                  {offer.positioning}
+                </p>
 
                 {offer.addOns && (
                   <div className="mb-8 p-4 rounded-lg bg-muted/60 border border-border">
