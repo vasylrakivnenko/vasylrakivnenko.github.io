@@ -106,7 +106,7 @@ export function Credentials() {
                 />
                 <div>
                   <p className="font-bold text-lg leading-tight" style={{ color: "#8C1515" }}>Stanford University</p>
-                  <p className="text-xs text-muted-foreground font-medium">Concurrent positions</p>
+                  <p className="text-xs text-muted-foreground font-medium">Three concurrent roles</p>
                 </div>
               </div>
             </div>
