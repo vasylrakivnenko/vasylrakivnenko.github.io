@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Truck, Pickaxe, Stethoscope, GraduationCap, Briefcase, Scale } from "lucide-react";
 
 const industries = [
+  { name: "Legaltech", description: "Document intelligence, PII redaction, and compliance.", icon: Scale },
   { name: "Logistics", description: "Supply chain optimization and predictive routing.", icon: Truck },
-  { name: "Copper & Gold Mining", description: "Operational efficiency and resource extraction models.", icon: Pickaxe },
   { name: "Healthtech", description: "Clinical workflows and patient data intelligence.", icon: Stethoscope },
+  { name: "IT", description: "Knowledge retrieval and data-driven insights.", icon: Briefcase },
   { name: "Edtech", description: "Personalized learning and administrative automation.", icon: GraduationCap },
-  { name: "Consulting", description: "Knowledge retrieval and data-driven insights.", icon: Briefcase },
-  { name: "Legaltech", description: "Document intelligence, PII redaction, and compliance.", icon: Scale }
+  { name: "Copper & Gold Mining", description: "Operational efficiency and resource extraction models.", icon: Pickaxe }
 ];
 
 const containerVariants = {
