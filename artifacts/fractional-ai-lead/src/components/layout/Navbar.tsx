@@ -5,9 +5,8 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { href: "#about", label: "What is it?" },
   { href: "#offers", label: "Offers" },
-  { href: "#workshop", label: "Workshop" },
   { href: "#approach", label: "Approach" },
-  { href: "#credentials", label: "Credentials" },
+  { href: "#credentials", label: "About Me" },
 ];
 
 export function Navbar() {
@@ -36,7 +35,9 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href="#contact"
+            href="https://calendly.com/vasyl-stanford/fractional-chief-ai-discovery-call"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
           >
             Let's Talk
@@ -68,7 +69,9 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="https://calendly.com/vasyl-stanford/fractional-chief-ai-discovery-call"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-3 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
             >

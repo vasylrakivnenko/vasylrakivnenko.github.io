@@ -12,10 +12,10 @@ export function Credentials() {
             transition={{ duration: 0.5 }}
             className="mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Credentials & Background</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
             <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
               <p>
-                A diverse, non-linear background—from driving CDL trucks to building and scaling companies to $10M+ in sales—bringing adaptability, humility, and perspective to bridging technical feasibility and human value.
+                A diverse, non-linear background — from driving CDL trucks to building and scaling companies to $10M+ in sales — bringing adaptability, humility, and perspective to bridging technical feasibility and human value.
               </p>
               <p>
                 Real value comes from lived experience, curiosity, continuous learning, and building work that is responsible, useful, and meaningful.
@@ -29,12 +29,12 @@ export function Credentials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-8 rounded-2xl bg-card border border-border"
+              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
             >
               <h3 className="text-2xl font-bold mb-1">AI Technical Lead</h3>
               <p className="text-primary mb-4 font-medium">Stanford Law School (Stanford Legal Design Lab)</p>
               <p className="text-muted-foreground leading-relaxed">
-                Agentic AI systems, RAG pipelines, document intelligence, PII detection & redaction, LLM customization & integration, applied ML. Also AI Technical Assistant for LAW 809E (AI for Legal Help).
+                Agentic AI systems, RAG pipelines, document intelligence, PII detection &amp; redaction, LLM customization &amp; integration, applied ML. Also AI Technical Assistant for LAW 809E (AI for Legal Help).
               </p>
             </motion.div>
 
@@ -43,7 +43,7 @@ export function Credentials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-8 rounded-2xl bg-card border border-border"
+              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
             >
               <h3 className="text-2xl font-bold mb-1">Instructor</h3>
               <p className="text-primary mb-4 font-medium">Stanford Continuing Studies</p>
@@ -57,7 +57,7 @@ export function Credentials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="p-8 rounded-2xl bg-card border border-border"
+              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
             >
               <h3 className="text-2xl font-bold mb-1">Research Affiliate</h3>
               <p className="text-primary mb-4 font-medium">Stanford GSB (Value Chain Innovation Initiative)</p>
@@ -71,26 +71,12 @@ export function Credentials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="p-8 rounded-2xl bg-card border border-border"
+              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
             >
               <h3 className="text-2xl font-bold mb-1">AI Project Lead</h3>
               <p className="text-primary mb-4 font-medium">PT Amman Mineral Nusa Tenggara</p>
               <p className="text-muted-foreground leading-relaxed">
-                AI & digital transformation program with McKinsey and FTI Consulting in mining operations.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="p-8 rounded-2xl bg-card border border-border"
-            >
-              <h3 className="text-2xl font-bold mb-1">Founding Angel Investor & Advisor</h3>
-              <p className="text-primary mb-4 font-medium">NocoDB</p>
-              <p className="text-muted-foreground leading-relaxed">
-                Open-source smart-database platform. Helped secure a $10.5M seed round (2022); now a top-3 open-source project trusted by 6,500+ organizations including Fortune 500 companies.
+                AI &amp; digital transformation program with McKinsey and FTI Consulting in mining operations.
               </p>
             </motion.div>
           </div>
@@ -99,10 +85,10 @@ export function Credentials() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-16 p-8 rounded-2xl bg-card border border-border"
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-16 p-8 rounded-2xl bg-card border border-border shadow-sm"
           >
-            <h3 className="text-2xl font-bold mb-6">Speaking & Guest Lectures</h3>
+            <h3 className="text-2xl font-bold mb-6">Speaking &amp; Guest Lectures</h3>
             <ul className="grid md:grid-cols-2 gap-4 text-muted-foreground">
               <li className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-primary" />
