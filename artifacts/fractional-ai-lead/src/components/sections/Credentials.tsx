@@ -104,7 +104,7 @@ export function Credentials() {
                 <img
                   src={stanfordLogo}
                   alt="Stanford University"
-                  className="h-12 w-auto shrink-0"
+                  className="h-[58px] w-auto shrink-0"
                 />
                 <div>
                   <p className="font-bold text-lg leading-tight" style={{ color: "#8C1515" }}>Stanford University</p>
