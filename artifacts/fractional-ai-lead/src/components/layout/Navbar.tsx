@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#about", label: "What is it?" },
   { href: "#offers", label: "Offers" },
   { href: "#approach", label: "Approach" },
   { href: "#credentials", label: "About Me" },
