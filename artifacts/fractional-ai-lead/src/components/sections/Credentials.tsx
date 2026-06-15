@@ -133,10 +133,8 @@ export function Credentials() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-16 rounded-2xl border border-border bg-card shadow-sm px-8 py-6"
           >
-            <p className="font-semibold text-foreground mb-2">AI Project Lead &amp; Consulting</p>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Led an AI and digital transformation program at PT Amman Mineral Nusa Tenggara — one of the world's largest copper and gold mining operations — alongside McKinsey and FTI Consulting. Prior to that, built a logistics company from scratch to $10M+ in revenue. Five-plus years of AI consulting and development across mining, healthtech, edtech, logistics, and legal — independently and with major consulting firms — providing a cross-industry lens most advisors lack.
-            </p>
+            <p className="font-semibold text-foreground mb-2">Other AI Projects & Consulting</p>
+            <p className="text-muted-foreground text-sm leading-relaxed">Led an AI and digital transformation program at PT Amman Mineral — one of the world's largest copper and gold mining companies — was working alongside consulting companies like McKinsey and FTI Consulting. Prior to that, built a logistics company from scratch to $10M+ in revenue. Five-plus years of AI consulting and development across mining, healthtech, edtech, logistics, and legal — independently and with major consulting firms — providing a cross-industry lens most advisors lack.</p>
           </motion.div>
 
           {/* Advisors */}
