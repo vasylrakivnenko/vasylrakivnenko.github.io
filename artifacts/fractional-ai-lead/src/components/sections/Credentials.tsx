@@ -1,10 +1,76 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import teachingImg from "@assets/Teaching_AI_at_Stanford_CSP_1781543611704.jpg";
+import gsbImg from "@assets/Speaking_at_Stanford_GSB_1781543654823.jpg";
+import unlvImg from "@assets/Speaking_at_University_of_Nevada_Las_Vegas_(UNLV)_1781543835166.png";
+import stanfordITImg from "@assets/Speaking_at_Stanford_IT_Conference_1781543884835.jpg";
+import vcEventImg from "@assets/Speaking_at_Network_VC_event_1781544156039.jpg";
+import googleImg from "@assets/Speaking_at_Google_1781544157456.jpg";
+
+const photos = [
+  { src: teachingImg, caption: "Teaching AI at Stanford Continuing Studies", venue: "Stanford University" },
+  { src: gsbImg, caption: "Panel speaker at Stanford GSB", venue: "Stanford Graduate School of Business" },
+  { src: stanfordITImg, caption: "Stanford IT Conference — Agentic Coding", venue: "Stanford University" },
+  { src: unlvImg, caption: "18th International Conference on Gambling & Risk Taking", venue: "University of Nevada Las Vegas (UNLV)" },
+  { src: vcEventImg, caption: "Silicon Valley VC pitch event", venue: "Silicon Valley" },
+  { src: googleImg, caption: "Silicon Valley Google Developer Group", venue: "Google, Mountain View" },
+];
+
+const stanfordRoles = [
+  {
+    title: "AI Technical Lead",
+    org: "Stanford Law School — Legal Design Lab",
+    detail: "Agentic AI systems, RAG pipelines, document intelligence, PII detection & redaction, LLM customization, and applied ML. Also AI Technical Assistant for LAW 809E (AI for Legal Help).",
+  },
+  {
+    title: "Instructor",
+    org: "Stanford Continuing Studies",
+    detail: '"Supervising AI Coding Agents" (TECH 43) — teaching professionals to evaluate, manage, and safely supervise autonomous coding tools.',
+  },
+  {
+    title: "Research Affiliate",
+    org: "Stanford GSB — Value Chain Innovation Initiative",
+    detail: "Research with Prof. Haim Mendelson on LLM performance, pricing dynamics, and model quality-cost tradeoffs.",
+  },
+];
+
+const INTERVAL = 5000;
 
 export function Credentials() {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [direction, setDirection] = useState(1);
+
+  const goTo = useCallback(
+    (index: number, dir = 1) => {
+      setDirection(dir);
+      setCurrent((index + photos.length) % photos.length);
+    },
+    []
+  );
+
+  const next = useCallback(() => goTo(current + 1, 1), [current, goTo]);
+  const prev = useCallback(() => goTo(current - 1, -1), [current, goTo]);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(next, INTERVAL);
+    return () => clearInterval(id);
+  }, [paused, next]);
+
+  const variants = {
+    enter: (dir: number) => ({ x: dir * 60, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: -dir * 60, opacity: 0 }),
+  };
+
   return (
-    <section id="credentials" className="py-24 bg-muted/30 border-y border-border">
+    <section id="credentials" className="py-24 border-t border-border">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+
+          {/* Header + bio */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -13,101 +79,149 @@ export function Credentials() {
             className="mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
-            <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
+            <div className="max-w-3xl text-lg text-muted-foreground leading-relaxed space-y-4">
               <p>
-                A diverse, non-linear background — from driving CDL trucks to building and scaling companies to $10M+ in sales — bringing adaptability, humility, and perspective to bridging technical feasibility and human value.
+                A deliberately non-linear path — from driving CDL trucks to building companies past $10M in sales, to working at the intersection of AI and some of the most rigorous institutions in the world. Each chapter taught something the previous one could not.
               </p>
               <p>
-                Real value comes from lived experience, curiosity, continuous learning, and building work that is responsible, useful, and meaningful.
+                I believe the best AI work comes from people who understand both the technology and the human systems around it. That means staying curious, staying honest about what AI can and cannot do, and building things that are genuinely useful.
               </p>
             </div>
           </motion.div>
 
-          <div className="space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-1">AI Technical Lead</h3>
-              <p className="text-primary mb-4 font-medium">Stanford Law School (Stanford Legal Design Lab)</p>
-              <p className="text-muted-foreground leading-relaxed">
-                Agentic AI systems, RAG pipelines, document intelligence, PII detection &amp; redaction, LLM customization &amp; integration, applied ML. Also AI Technical Assistant for LAW 809E (AI for Legal Help).
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-1">Instructor</h3>
-              <p className="text-primary mb-4 font-medium">Stanford Continuing Studies</p>
-              <p className="text-muted-foreground leading-relaxed">
-                "Supervising AI Coding Agents" (TECH 43): teaching professionals to evaluate, manage, and safely supervise autonomous coding tools.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-1">Research Affiliate</h3>
-              <p className="text-primary mb-4 font-medium">Stanford GSB (Value Chain Innovation Initiative)</p>
-              <p className="text-muted-foreground leading-relaxed">
-                Research with Prof. Haim Mendelson on LLM performance, pricing dynamics, and model quality-cost tradeoffs.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="p-8 rounded-2xl bg-card border border-border shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-1">AI Project Lead</h3>
-              <p className="text-primary mb-4 font-medium">PT Amman Mineral Nusa Tenggara</p>
-              <p className="text-muted-foreground leading-relaxed">
-                AI &amp; digital transformation program with McKinsey and FTI Consulting in mining operations.
-              </p>
-            </motion.div>
-          </div>
-
+          {/* Stanford block */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-16 p-8 rounded-2xl bg-card border border-border shadow-sm"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-10 rounded-2xl border border-border bg-card shadow-sm overflow-hidden"
           >
-            <h3 className="text-2xl font-bold mb-6">Speaking &amp; Guest Lectures</h3>
-            <ul className="grid md:grid-cols-2 gap-4 text-muted-foreground">
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                Stanford GSB
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                University of Nevada Las Vegas (UNLV)
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                Zurich University of Applied Sciences of the Grisons
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                Silicon Valley Google Developer Group
-              </li>
-            </ul>
+            {/* Stanford header bar */}
+            <div className="flex items-center gap-4 px-8 py-5 border-b border-border bg-[#8C1515]/5">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-black text-xl shrink-0"
+                  style={{ backgroundColor: "#8C1515" }}
+                >
+                  S
+                </div>
+                <div>
+                  <p className="font-bold text-lg leading-tight" style={{ color: "#8C1515" }}>Stanford University</p>
+                  <p className="text-xs text-muted-foreground font-medium">Three concurrent roles</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Roles */}
+            <div className="divide-y divide-border">
+              {stanfordRoles.map((role, i) => (
+                <div key={i} className="px-8 py-6 md:flex md:gap-8">
+                  <div className="md:w-56 shrink-0 mb-2 md:mb-0">
+                    <p className="font-semibold text-foreground">{role.title}</p>
+                    <p className="text-sm text-primary font-medium mt-0.5">{role.org}</p>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{role.detail}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
+
+          {/* Field experience paragraph */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-16 rounded-2xl border border-border bg-card shadow-sm px-8 py-6"
+          >
+            <p className="font-semibold text-foreground mb-2">AI Project Lead &amp; Consulting</p>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Led an AI and digital transformation program at PT Amman Mineral Nusa Tenggara — one of the world's largest copper and gold mining operations — alongside McKinsey and FTI Consulting. Prior to that, built a logistics company from scratch to $10M+ in revenue. Five-plus years of AI consulting and development across mining, healthtech, edtech, logistics, and legal — independently and with major consulting firms — providing a cross-industry lens most advisors lack.
+            </p>
+          </motion.div>
+
+          {/* Photo carousel — Speaking & Events */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h3 className="text-2xl font-bold mb-8">Speaking &amp; Events</h3>
+
+            <div
+              className="relative rounded-2xl overflow-hidden bg-slate-950 shadow-lg select-none"
+              style={{ aspectRatio: "16/9" }}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              <AnimatePresence custom={direction} mode="wait">
+                <motion.img
+                  key={current}
+                  src={photos[current].src}
+                  alt={photos[current].caption}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </AnimatePresence>
+
+              {/* Gradient overlay for caption */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+
+              {/* Caption */}
+              <div className="absolute bottom-0 left-0 right-0 px-6 py-5">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={current}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <p className="text-white font-semibold text-base leading-snug">{photos[current].caption}</p>
+                    <p className="text-slate-300 text-sm mt-0.5">{photos[current].venue}</p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Prev / Next */}
+              <button
+                onClick={prev}
+                aria-label="Previous photo"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors backdrop-blur-sm"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next photo"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors backdrop-blur-sm"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+
+              {/* Dot indicators */}
+              <div className="absolute top-4 right-5 flex gap-1.5">
+                {photos.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i, i > current ? 1 : -1)}
+                    aria-label={`Go to photo ${i + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === current ? "w-5 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
