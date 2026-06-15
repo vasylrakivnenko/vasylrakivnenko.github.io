@@ -83,7 +83,7 @@ export function Offers() {
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Deep-dive</p>
               <h3 className="text-2xl font-bold mb-1">AI Opportunity Assessment</h3>
               <div className="mb-5">
-                <span className="text-3xl font-bold text-primary">$6,000</span>
+                <span className="text-3xl font-bold text-primary">$4,000</span>
               </div>
 
               {/* Format pills */}
@@ -95,8 +95,13 @@ export function Offers() {
                 ))}
               </div>
 
+              {/* Description */}
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Discover where AI creates real value across your business, pressure-test the best ideas, and leave with a clear, prioritized blueprint your whole team believes in.
+              </p>
+
               {/* Outcomes */}
-              <ul className="space-y-3 mb-6 flex-grow">
+              <ul className="space-y-3 mb-8 flex-grow">
                 {[
                   "AI Opportunity Blueprint (value vs. effort map)",
                   "Prioritized use cases ranked by value & feasibility",
@@ -109,11 +114,6 @@ export function Offers() {
                   </li>
                 ))}
               </ul>
-
-              {/* Description */}
-              <p className="text-sm text-muted-foreground leading-relaxed mb-8">
-                Discover where AI creates real value across your business, pressure-test the best ideas, and leave with a clear, prioritized blueprint your whole team believes in.
-              </p>
 
               <a
                 href="https://calendly.com/vasyl-stanford/fractional-chief-ai-discovery-call"
