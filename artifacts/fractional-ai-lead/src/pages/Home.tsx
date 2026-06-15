@@ -4,7 +4,6 @@ import { Explainer } from "@/components/sections/Explainer";
 import { Offers } from "@/components/sections/Offers";
 import { Services } from "@/components/sections/Services";
 import { Approach } from "@/components/sections/Approach";
-import { Industries } from "@/components/sections/Industries";
 import { Credentials } from "@/components/sections/Credentials";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
@@ -18,7 +17,6 @@ export default function Home() {
         <Explainer />
         <Services />
         <Approach />
-        <Industries />
         <Offers />
         <Credentials />
         <Contact />
