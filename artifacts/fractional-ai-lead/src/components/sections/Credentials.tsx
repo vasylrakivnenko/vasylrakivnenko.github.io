@@ -141,6 +141,43 @@ export function Credentials() {
             </p>
           </motion.div>
 
+          {/* Advisors */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mb-16 rounded-2xl border border-border bg-card shadow-sm overflow-hidden"
+          >
+            <div className="px-8 py-5 border-b border-border">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Advisors</p>
+            </div>
+            <div className="divide-y divide-border">
+              {[
+                {
+                  name: "Haim Mendelson",
+                  title: "Kleiner Perkins Caufield & Byers Professor of Electronic Business and Commerce and Management",
+                  org: "Stanford Graduate School of Business",
+                },
+                {
+                  name: "Alexander Soroka",
+                  title: "Managing Partner",
+                  org: "Network VC",
+                },
+              ].map((advisor) => (
+                <div key={advisor.name} className="px-8 py-5 md:flex md:items-center md:gap-8">
+                  <div className="md:w-48 shrink-0 mb-1 md:mb-0">
+                    <p className="font-semibold text-foreground">{advisor.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-foreground/80">{advisor.title}</p>
+                    <p className="text-sm text-primary font-medium mt-0.5">{advisor.org}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Photo carousel — Speaking & Events */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
