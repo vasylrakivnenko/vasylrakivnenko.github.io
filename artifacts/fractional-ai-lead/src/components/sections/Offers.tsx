@@ -157,6 +157,11 @@ export function Offers() {
                 </span>
               </div>
 
+              {/* Description */}
+              <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                Senior AI strategy and execution oversight on a flexible, part-time basis — so you get a CAIO-level partner without a full-time hire.
+              </p>
+
               {/* Outcomes */}
               <ul className="space-y-3 mb-6 flex-grow">
                 {[
@@ -170,11 +175,6 @@ export function Offers() {
                   </li>
                 ))}
               </ul>
-
-              {/* Description */}
-              <p className="text-sm text-slate-400 leading-relaxed mb-6">
-                Senior AI strategy and execution oversight on a flexible, part-time basis — so you get a CAIO-level partner without a full-time hire.
-              </p>
 
               {/* Optional delivery team */}
               <div className="rounded-xl border border-slate-700/60 bg-slate-800/50 px-5 py-4 mb-8">
