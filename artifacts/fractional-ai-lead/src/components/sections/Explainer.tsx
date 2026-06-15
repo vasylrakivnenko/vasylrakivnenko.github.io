@@ -11,7 +11,7 @@ export function Explainer() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">What is a Fractional AI Lead?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">What is a Fractional AI Lead?</h2>
             
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
