@@ -160,6 +160,8 @@
 
   /* ----------------------------------------------- the stack diagram -- */
 
+  var ARROW =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
   var layers = $$(".layer");
   var panel = $(".layerpanel");
   if (layers.length && panel) {
@@ -175,6 +177,17 @@
           return '<span class="chip">' + c + "</span>";
         })
         .join("");
+      var evLabel = btn.getAttribute("data-evidence");
+      var evHref = btn.getAttribute("data-evidence-href");
+      var evidence = evLabel
+        ? '<a class="layerpanel__evidence" href="' +
+          evHref +
+          '" target="_blank" rel="noopener noreferrer">' +
+          evLabel +
+          " " +
+          ARROW +
+          "</a>"
+        : "";
       panel.innerHTML =
         '<div class="layerpanel__body">' +
         '<p class="layerpanel__tag">Layer ' +
@@ -188,6 +201,7 @@
         "<p>" +
         btn.getAttribute("data-detail") +
         "</p>" +
+        evidence +
         '<div class="layerpanel__chips">' +
         chips +
         "</div>" +

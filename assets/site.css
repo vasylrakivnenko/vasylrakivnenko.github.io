@@ -858,7 +858,7 @@ h2.section__title {
 .layer {
   position: relative;
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr);
+  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
   align-items: center;
   gap: 1rem;
   width: 100%;
@@ -955,6 +955,52 @@ h2.section__title {
   font-size: 0.9375rem;
   line-height: 1.7;
 }
+/* A layer that links out to real work carries a small marker, so you can see
+   at a glance which of the six have something published behind them. */
+.layer__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--rust);
+  opacity: 0.45;
+  transition: opacity 0.25s, transform 0.25s var(--ease);
+}
+.layer:hover .layer__dot,
+.layer.is-active .layer__dot {
+  opacity: 1;
+  transform: scale(1.35);
+}
+
+.layerpanel__evidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.125rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(192, 112, 58, 0.28);
+  background: var(--rust-wash);
+  color: var(--rust-deep);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  align-self: flex-start;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.layerpanel__evidence:hover {
+  border-color: var(--rust);
+  background: #fdeade;
+}
+.layerpanel__evidence svg {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.layerpanel__evidence:hover svg {
+  transform: translateX(2px);
+}
+
 .layerpanel__chips {
   display: flex;
   flex-wrap: wrap;

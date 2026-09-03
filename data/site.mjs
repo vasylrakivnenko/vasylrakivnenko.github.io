@@ -58,10 +58,17 @@ export const hero = {
   },
 };
 
-/* ------------------------------------------------- the stack I build --- */
+/* ------------------------------------------------------ what I build --- */
+/* This used to be two sections: a "What I build" card grid and a "How I
+   build" layer diagram. They were the same six technical domains under
+   different names, sharing eleven tech chips, so they are now one.
+
+   The best lines from the cards are folded into the layer details, and each
+   layer links to real work at that layer where such work exists. Two of the
+   six have no link — stated by its absence rather than papered over. */
 
 export const stackSection = {
-  eyebrow: "How I build",
+  eyebrow: "What I build",
   title: "Six layers decide whether AI survives contact with production.",
   lede: "Nearly every enterprise AI project that fails, fails in the same place: the gap between a demo that impresses a room and a system that runs on a Tuesday morning without anyone watching. These are the layers that gap is made of. I build all six.",
   layers: [
@@ -73,6 +80,7 @@ export const stackSection = {
       detail:
         "The best model in the world is worthless behind a UI nobody opens. I ship AI into the tools your team already lives in — the internal dashboard, the CRM, Slack, the case management system — so adoption is the default rather than a change-management programme.",
       stack: ["React", "TypeScript", "Streaming UI", "Slack / Teams", "REST"],
+      evidence: null,
     },
     {
       num: "05",
@@ -80,8 +88,12 @@ export const stackSection = {
       hint: "Planning, tool use, human handoff",
       headline: "State machines, not prompt spaghetti.",
       detail:
-        "Multi-step agents that plan, call your internal tools, recover from failure, and know exactly when to stop and ask a human. Built as explicit, inspectable graphs — so when something goes wrong you can point at the node that did it instead of re-reading a 4,000-token prompt.",
+        "Multi-step agents that plan, call your internal tools, recover from failure, and know when to stop and ask a human — built as explicit, inspectable graphs, and scoped so the blast radius of a mistake is known in advance. When something goes wrong you can point at the node that did it instead of re-reading a 4,000-token prompt.",
       stack: ["LangGraph", "Tool calling", "MCP", "Queues", "Human-in-the-loop"],
+      evidence: {
+        label: "I teach this: TECH 43, Supervising AI Coding Agents",
+        href: "https://continuingstudies.stanford.edu/courses/detail/20261_TECH-43",
+      },
     },
     {
       num: "04",
@@ -89,8 +101,12 @@ export const stackSection = {
       hint: "Your documents, made answerable",
       headline: "Answers with citations, not confident guesses.",
       detail:
-        "Hybrid search over your own corpus — contracts, tickets, filings, shift reports — with reranking, chunking that respects document structure, and citations on every claim. If the system can’t ground an answer, it says so. That property is what makes it usable in a regulated review.",
+        "Hybrid search over your own corpus — contracts, tickets, filings, shift reports — with reranking, chunking that respects document structure, and a citation on every claim, without shipping your documents into somebody else’s training set. If the system can’t ground an answer, it says so. That property is what makes it usable in a regulated review.",
       stack: ["pgvector", "Hybrid BM25", "Rerankers", "OCR", "Knowledge graphs"],
+      evidence: {
+        label: "Benchmark: vision LLMs on a real legal OCR task",
+        href: "https://medium.com/@rakivnenko",
+      },
     },
     {
       num: "03",
@@ -98,7 +114,7 @@ export const stackSection = {
       hint: "Routing, fine-tuning, structured output",
       headline: "The right model per task, not one model for everything.",
       detail:
-        "Frontier models where reasoning matters, small open-weight models where volume and latency matter, fine-tuning only where it demonstrably earns its cost. Structured outputs with schema validation, so downstream code never has to parse prose.",
+        "Frontier models where reasoning matters, small open-weight models where volume and latency matter, fine-tuning only where it demonstrably earns its cost — and an honest “you don’t need this” where the maths doesn’t work out. Structured outputs with schema validation, so downstream code never has to parse prose.",
       stack: [
         "Claude",
         "Open weights",
@@ -106,6 +122,10 @@ export const stackSection = {
         "vLLM",
         "Structured output",
       ],
+      evidence: {
+        label: "Cost–performance benchmark across vision models",
+        href: "https://medium.com/@rakivnenko",
+      },
     },
     {
       num: "02",
@@ -113,8 +133,12 @@ export const stackSection = {
       hint: "How you know it still works",
       headline: "If quality regresses, a dashboard tells you — not a customer.",
       detail:
-        "Every system ships with a golden dataset, an offline eval suite in CI, and online tracing. Plus the unglamorous safety layer: PII detection and redaction, prompt-injection defence, tenant isolation, cost and latency budgets, and an audit trail that survives a compliance review.",
+        "Every system ships with a golden dataset, an offline eval suite in CI, and online tracing — so “is it working” has a number attached rather than a vibe. Plus the unglamorous safety layer: PII detection and redaction, prompt-injection defence, tenant isolation, cost and latency budgets, and audit logging built for people who will one day be asked to explain a decision.",
       stack: ["Eval harnesses", "Tracing", "Red-teaming", "PII redaction", "CI"],
+      evidence: {
+        label: "Paper: Bias in Text Embedding Models (arXiv:2406.12138)",
+        href: "https://arxiv.org/abs/2406.12138",
+      },
     },
     {
       num: "01",
@@ -122,54 +146,9 @@ export const stackSection = {
       hint: "The part nobody demos",
       headline: "Boring, observable, and yours to operate.",
       detail:
-        "Ingestion pipelines, vector and relational stores, deployment into your cloud and your identity provider, monitoring, and cost controls. Handover includes runbooks and a team that can actually run it — the goal is your independence, not a permanent dependency on me.",
+        "Ingestion pipelines, vector and relational stores, monitoring and cost controls — running in your cloud, behind your SSO, in your CI, not on a laptop under my desk. Handover includes runbooks and a team trained to extend it without me. The goal is your independence, not a permanent dependency on me.",
       stack: ["Python", "Docker", "AWS / GCP", "Airflow", "Observability"],
-    },
-  ],
-};
-
-/* ------------------------------------------------------ what I build --- */
-
-export const capabilities = {
-  eyebrow: "Engineering",
-  title: "What I build",
-  lede: "Six systems that come up again and again across legal, clinical, industrial and education settings. Different domains, the same engineering problems underneath.",
-  items: [
-    {
-      icon: "workflow",
-      title: "Agentic workflow automation",
-      body: "Multi-step agents that take a real business process end to end — read the input, call your systems, make the call they’re allowed to make, and escalate the rest. Scoped so the blast radius of a mistake is always known in advance.",
-      chips: ["LangGraph", "Tool calling", "MCP"],
-    },
-    {
-      icon: "search",
-      title: "Retrieval & document intelligence",
-      body: "Search and question-answering over your own document estate, with citations. Contracts, clinical notes, filings, inspection reports — extracted, structured, and made answerable without shipping your data to somebody else’s training set.",
-      chips: ["pgvector", "Rerankers", "OCR"],
-    },
-    {
-      icon: "gauge",
-      title: "Evaluation & observability",
-      body: "The discipline that separates a product from a demo. Golden datasets, offline evals wired into CI, online tracing and drift alerts. You get a number for “is it working” instead of a vibe.",
-      chips: ["Eval harnesses", "Tracing", "Golden sets"],
-    },
-    {
-      icon: "cpu",
-      title: "Model selection & fine-tuning",
-      body: "Benchmarking your actual task across frontier and open-weight models, then routing by cost, latency and accuracy. Fine-tuning and distillation where the maths works out — and an honest “you don’t need this” where it doesn’t.",
-      chips: ["LoRA", "vLLM", "Distillation"],
-    },
-    {
-      icon: "shield",
-      title: "Security, privacy & guardrails",
-      body: "PII detection and redaction, tenant isolation, prompt-injection defence, and audit logging designed for people who will one day be asked to explain a decision. I’ve shipped AI in regulated, high-stakes settings and built for that from day one.",
-      chips: ["PII redaction", "Isolation", "Audit trails"],
-    },
-    {
-      icon: "layers",
-      title: "Integration & handover",
-      body: "It runs in your cloud, behind your SSO, in your CI — not on a laptop under my desk. Every engagement ends with runbooks, architecture docs, and a team I’ve trained to extend it without me.",
-      chips: ["AWS / GCP", "SSO", "Runbooks"],
+      evidence: null,
     },
   ],
 };

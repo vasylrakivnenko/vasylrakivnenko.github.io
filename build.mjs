@@ -21,7 +21,6 @@ import {
   nav,
   hero,
   stackSection,
-  capabilities,
   about,
   research,
   projects,
@@ -73,16 +72,6 @@ const ICON = {
     '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>',
   printer:
     '<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6M6 14h12v7H6z"/>',
-  // capability icons
-  workflow:
-    '<rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/>',
-  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
-  gauge: '<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
-  cpu: '<rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/>',
-  shield: '<path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6l8-3 8 3z"/>',
-  layers:
-    '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.5-9.17 4.16a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.16a2 2 0 0 1-1.66 0L2 17.5"/>',
-  expand: '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
   github:
     '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>',
 };
@@ -256,20 +245,27 @@ function stackDiagram() {
     (l) => `<button type="button" class="layer" role="tab" aria-selected="false"
   data-num="${esc(l.num)}" data-name="${esc(l.name)}"
   data-headline="${esc(l.headline)}" data-detail="${esc(l.detail)}"
-  data-stack="${esc(l.stack.join("|"))}">
+  data-stack="${esc(l.stack.join("|"))}"
+  data-evidence="${esc(l.evidence ? l.evidence.label : "")}"
+  data-evidence-href="${esc(l.evidence ? l.evidence.href : "")}">
   <span class="layer__num">${esc(l.num)}</span>
   <span>
     <span class="layer__name">${esc(l.name)}</span>
     <span class="layer__hint">${esc(l.hint)}</span>
   </span>
+  ${l.evidence ? `<span class="layer__dot" title="Linked work at this layer"></span>` : ""}
 </button>`,
   );
 
   // The panel is server-rendered with layer 06 so the section is meaningful
   // before (and without) JavaScript.
   const first = stackSection.layers[0];
+  const evidence = (l) =>
+    l.evidence
+      ? `<a class="layerpanel__evidence" href="${l.evidence.href}" target="_blank" rel="noopener noreferrer">${esc(l.evidence.label)} ${icon("arrowRight")}</a>`
+      : "";
 
-  return `<section class="section section--cool" id="stack">
+  return `<section class="section section--cool" id="build">
 <div class="shell">
   <div class="section__head" data-reveal>
     <p class="eyebrow">${esc(stackSection.eyebrow)}</p>
@@ -283,32 +279,10 @@ function stackDiagram() {
         <p class="layerpanel__tag">Layer ${esc(first.num)} · ${esc(first.name)}</p>
         <h3>${esc(first.headline)}</h3>
         <p>${esc(first.detail)}</p>
-        <div class="layerpanel__chips">${list(first.stack, (s) => `<span class="chip">${esc(s)}</span>`)}</div>
+        ${evidence(first)}
+        <div class="layerpanel__chips">${list(first.stack, (t) => `<span class="chip">${esc(t)}</span>`)}</div>
       </div>
     </div>
-  </div>
-</div>
-</section>`;
-}
-
-function capabilitiesSection() {
-  return `<section class="section section--cool" id="capabilities">
-<div class="shell">
-  <div class="section__head" data-reveal>
-    <p class="eyebrow">${esc(capabilities.eyebrow)}</p>
-    <h2 class="section__title">${esc(capabilities.title)}</h2>
-    <p class="section__lede">${esc(capabilities.lede)}</p>
-  </div>
-  <div class="grid grid--3">
-    ${list(
-      capabilities.items,
-      (c, i) => `<article class="card" data-reveal data-reveal-delay="${i * 70}">
-  <div class="card__icon">${icon(c.icon)}</div>
-  <h3>${esc(c.title)}</h3>
-  <p>${esc(c.body)}</p>
-  <div class="card__chips">${list(c.chips, (t) => `<span class="chip">${esc(t)}</span>`)}</div>
-</article>`,
-    )}
   </div>
 </div>
 </section>`;
@@ -546,11 +520,10 @@ function homePage() {
     `<main id="main">` +
     heroSection() +
     aboutSection() +
-    capabilitiesSection() +
+    stackDiagram() +
     researchSection() +
     nowSection() +
     portfolioSection() +
-    stackDiagram() +
     contactSection() +
     `</main>` +
     footer()

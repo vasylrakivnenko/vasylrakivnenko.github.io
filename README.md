@@ -11,7 +11,7 @@ dependencies, no `node_modules`. Deploys straight from `main` to GitHub Pages.
 
 | File | What's in it |
 | --- | --- |
-| `data/site.mjs` | Nav, hero, the stack diagram, capabilities, About, research, writing, talks, Now, portfolio, sector pages |
+| `data/site.mjs` | Nav, hero, What I build (the six-layer stack), About, research, writing, talks, Now, portfolio, sector pages |
 | `data/cv.mjs` | Everything on `/cv/` |
 
 Change the data, then regenerate:
@@ -54,6 +54,11 @@ assets/site.js      progressive enhancement only; the site works without it
   sector with no projects renders an honest "nothing published here yet" card
   instead of filler.
 - **Keep `now.updated` current.** A stale `Now` block is worse than none.
+- **The six layers carry evidence links.** Each entry in `stackSection.layers`
+  takes an optional `evidence: { label, href }` pointing at real published work
+  at that layer; layers with one show a small rust dot in the list. Two of six
+  currently have none — leave them `null` rather than linking something
+  tangential. That contrast is what makes the other four mean anything.
 - **The hero background treatment is deliberate** — the speaker photo, the
   gradient stack and the 22-second ken-burns drift are carried over from the
   previous design on purpose. See the note above `.hero` in `site.css`.
