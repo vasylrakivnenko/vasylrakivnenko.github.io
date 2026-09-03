@@ -29,10 +29,14 @@ export const projects = [
   },
   {
     sector: "legal",
-    title: "Jury-instruction drafting",
-    meta: "AI Engineer · law firm, Los Angeles",
-    one: "Trial instructions were drafted by hand, retyping party names, addresses and notice dates into each one. The system reads the filed checklist, fills the blanks across a 96-template library, and returns a Word draft that highlights every value it filled and every one it couldn’t.",
-    outcome: "A 22-instruction case drafted in about 75 seconds.",
+    title: "Jury-instruction drafting from a filed court checklist",
+    meta: "Design and build, end to end · law firm, Los Angeles",
+    one: "Before an eviction trial both sides file a checklist of the jury instructions they want read — 15–25 per case, each one full of blanks a paralegal retyped by hand from the complaint, down to which verb agrees with how many defendants there are. The app reads the filed checklist, fills what it can from a 96-template library, and returns a Word draft that highlights every value it filled in yellow and every blank it couldn’t in red. It never picks which instructions apply, and it never hides a gap behind a plausible guess.",
+    outcome:
+      "A 22-instruction case drafted in about a minute. 70 of the 96 templates need no model call at all.",
+    // TODO: the business number, once you have it — cases processed, before/
+    // after time per case, or rework rate. That would be stronger than the
+    // engineering timings above.
   },
   {
     sector: "mining",
