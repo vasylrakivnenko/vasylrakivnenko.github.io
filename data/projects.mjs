@@ -10,13 +10,16 @@
    quietly. Filling them is the single highest-value edit to this site.
    ========================================================================== */
 
-export const sectorLabels = {
-  legal: "Legal",
-  "internal-ops": "Internal ops",
-  mining: "Mining",
-  edutech: "Education",
-  transportation: "Logistics",
-  healthtech: "Health",
+/* One accent per sector. Muted and closely valued so six colours read as a
+   set rather than a rainbow — each is used only for the chip and a hairline
+   at the top of the card. */
+export const sectors = {
+  legal: { label: "Legal", color: "#3B5BDB", tint: "#EEF1FE" },
+  "internal-ops": { label: "Internal ops", color: "#C0703A", tint: "#FDF2E9" },
+  mining: { label: "Mining", color: "#8A6D3B", tint: "#F8F2E6" },
+  edutech: { label: "Education", color: "#6741D9", tint: "#F1EDFD" },
+  transportation: { label: "Logistics", color: "#0B7285", tint: "#E6F3F5" },
+  healthtech: { label: "Health", color: "#2B8A5A", tint: "#E8F5EE" },
 };
 
 export const projects = [

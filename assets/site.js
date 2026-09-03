@@ -251,6 +251,68 @@
     });
   }
 
+
+  /* --------------------------------------------------- portfolio modal -- */
+
+  var modal = $(".modal");
+  if (modal) {
+    var panel = $(".modal__panel", modal);
+    var lastFocus = null;
+
+    var closeModal = function () {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    };
+
+    var openModal = function (btn) {
+      lastFocus = btn;
+      panel.style.setProperty("--accent", btn.getAttribute("data-color"));
+      panel.style.setProperty("--tint", btn.getAttribute("data-tint"));
+      $(".modal__tag", modal).textContent = btn.getAttribute("data-label");
+      $(".modal__title", modal).textContent = btn.getAttribute("data-title");
+      $(".modal__meta", modal).textContent = btn.getAttribute("data-meta");
+      $(".modal__body", modal).textContent = btn.getAttribute("data-body");
+      var out = $(".modal__outcome", modal);
+      var text = btn.getAttribute("data-outcome");
+      out.textContent = text;
+      out.hidden = !text;
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+      panel.scrollTop = 0;
+      $(".modal__close", modal).focus();
+    };
+
+    $$(".pcard__more").forEach(function (btn) {
+      on(btn, "click", function () {
+        openModal(btn);
+      });
+    });
+    $$("[data-modal-close]", modal).forEach(function (el) {
+      on(el, "click", closeModal);
+    });
+    on(document, "keydown", function (e) {
+      if (e.key === "Escape" && !modal.hidden) closeModal();
+      // keep tabbing inside the dialog while it is open
+      if (e.key === "Tab" && !modal.hidden) {
+        var f = $$(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          panel,
+        );
+        if (!f.length) return;
+        var first = f[0];
+        var last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+
   /* ------------------------------------------------- speaking gallery -- */
 
   var gallery = $("[data-gallery]");

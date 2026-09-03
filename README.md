@@ -32,9 +32,13 @@ Commit the generated files; Pages serves them as-is.
 
 ## Notes
 
-- **Portfolio entries are two lines and an outcome.** One line of what it is,
-  one of what it changed. Resist adding architecture or implementation detail
-  — that conversation belongs on a call, where you control how much you give.
+- **Portfolio is a 2-up grid of equal-height cards.** The card clamps the
+  description to three lines; "Read more" opens the full text in a dialog.
+  Resist adding architecture or implementation detail even there — that
+  conversation belongs on a call, where you control how much you give.
+- **Each sector has an accent colour** in `sectors` in `data/projects.mjs`
+  (`color` for the chip and hairline, `tint` for backgrounds). Adding a sector
+  means adding an entry there.
 - **An entry whose `outcome` starts with `TODO` renders without an outcome
   line**, and `node build.mjs` prints a list of which ones. Filling those in is
   the highest-value edit available on this site. Never estimate a figure: it's

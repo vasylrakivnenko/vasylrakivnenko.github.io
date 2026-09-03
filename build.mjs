@@ -14,7 +14,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { site, nav, hero, about, research, contact } from "./data/site.mjs";
-import { projects, sectorLabels } from "./data/projects.mjs";
+import { projects, sectors } from "./data/projects.mjs";
 import { cv } from "./data/cv.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -235,28 +235,48 @@ function aboutSection() {
 </section>`;
 }
 
-/* One line of what it is, one line of what it changed. That's the whole row. */
+/* A 2-up grid of equal-height cards. The card shows the short read; the
+   full description opens in a dialog, so the section stays scannable. */
 function workSection() {
+  const card = (p, i) => {
+    const s = sectors[p.sector] ?? { label: p.sector, color: "#5D6B7A", tint: "#F1F3F6" };
+    const hasOutcome = !/^TODO/.test(p.outcome);
+    return `<article class="pcard" style="--accent:${s.color};--tint:${s.tint}" data-reveal data-reveal-delay="${Math.min(i, 3) * 60}">
+  <span class="pcard__rule" aria-hidden="true"></span>
+  <span class="pcard__tag">${esc(s.label)}</span>
+  <h3 class="pcard__title">${esc(p.title)}</h3>
+  <p class="pcard__meta">${esc(p.meta)}</p>
+  <p class="pcard__body">${esc(p.one)}</p>
+  ${hasOutcome ? `<p class="pcard__outcome">${esc(p.outcome)}</p>` : ""}
+  <button class="pcard__more" type="button"
+    data-title="${esc(p.title)}" data-meta="${esc(p.meta)}"
+    data-body="${esc(p.one)}" data-outcome="${hasOutcome ? esc(p.outcome) : ""}"
+    data-label="${esc(s.label)}" data-color="${s.color}" data-tint="${s.tint}">
+    Read more ${icon("arrowRight")}
+  </button>
+</article>`;
+  };
+
   return `<section class="section section--cool" id="work">
 <div class="shell">
   <div class="section__head" data-reveal>
     <h2 class="section__title">Portfolio</h2>
     <p class="section__lede">Systems that went into production. Most of it is under NDA, so the work is described and the clients are not.</p>
   </div>
-  <ol class="work">
-    ${list(
-      projects,
-      (p, i) => `<li class="work__item" data-reveal data-reveal-delay="${Math.min(i, 4) * 50}">
-  <div class="work__head">
-    <h3>${esc(p.title)}</h3>
-    <span class="work__tag">${esc(sectorLabels[p.sector] ?? p.sector)}</span>
+  <div class="pgrid">${list(projects, card)}</div>
+</div>
+
+<div class="modal" hidden>
+  <div class="modal__scrim" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <span class="modal__rule" aria-hidden="true"></span>
+    <button class="modal__close" type="button" aria-label="Close" data-modal-close>${icon("x")}</button>
+    <span class="modal__tag"></span>
+    <h3 class="modal__title" id="modal-title"></h3>
+    <p class="modal__meta"></p>
+    <p class="modal__body"></p>
+    <p class="modal__outcome"></p>
   </div>
-  <p class="work__meta">${esc(p.meta)}</p>
-  <p class="work__one">${esc(p.one)}</p>
-  ${/^TODO/.test(p.outcome) ? "" : `<p class="work__outcome">${esc(p.outcome)}</p>`}
-</li>`,
-    )}
-  </ol>
 </div>
 </section>`;
 }
