@@ -1,0 +1,426 @@
+/* ==========================================================================
+   /cv/ — screen layout + a print stylesheet that turns Cmd-P into a clean
+   A4 PDF. The web page is the source of truth; the PDF can never drift.
+   ========================================================================== */
+
+.cv {
+  background: var(--cream);
+}
+
+/* ---------------------------------------------------------- masthead -- */
+
+.cv__masthead {
+  background: var(--ink);
+  color: #fff;
+  padding-block: clamp(6rem, 10vw, 8rem) clamp(3rem, 6vw, 4rem);
+}
+.cv__id {
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (min-width: 860px) {
+  .cv__id {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 3.5rem;
+  }
+}
+.cv__masthead h1 {
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.cv__title {
+  font-family: var(--display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 600;
+  color: var(--rust);
+  margin-bottom: 1.5rem;
+}
+.cv__summary {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.75;
+  max-width: 40rem;
+}
+
+.cv__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.cv__meta a {
+  display: grid;
+  gap: 0.125rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.82);
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+  word-break: break-word;
+}
+.cv__meta a:hover {
+  border-color: rgba(192, 112, 58, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+}
+.cv__meta a span {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+.cv__print {
+  margin-top: 0.75rem;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------- body -- */
+
+.cv__body-grid {
+  display: grid;
+  gap: 3rem;
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+  align-items: start;
+}
+@media (min-width: 940px) {
+  .cv__body-grid {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 3.5rem;
+  }
+}
+
+.cv__section {
+  margin-bottom: 3rem;
+}
+.cv__section:last-child {
+  margin-bottom: 0;
+}
+.cv__h2 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+.cv__note {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.cv__entries {
+  display: grid;
+  gap: 1.75rem;
+}
+.cv__entry {
+  display: grid;
+  gap: 0.5rem 1.5rem;
+  break-inside: avoid;
+}
+@media (min-width: 700px) {
+  .cv__entry {
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+  }
+}
+.cv__when {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding-top: 0.2rem;
+  letter-spacing: 0.02em;
+}
+.cv__what h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 0.2rem;
+}
+.cv__org {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--rust-deep);
+  margin-bottom: 0.6rem;
+}
+.cv__body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+.cv__bullets {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+.cv__bullets li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+.cv__bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--rust);
+}
+.cv__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+}
+
+/* ------------------------------------------------------------ aside -- */
+
+.cv__aside {
+  display: grid;
+  gap: 1rem;
+  position: sticky;
+  top: 5.5rem;
+}
+@media (max-width: 939px) {
+  .cv__aside {
+    position: static;
+  }
+}
+.cv__panel {
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 1.5rem;
+  box-shadow: var(--lift-1);
+  break-inside: avoid;
+}
+.cv__h3 {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.cv__plain {
+  display: grid;
+  gap: 0.5rem;
+}
+.cv__plain li {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-body);
+  padding-left: 1rem;
+  position: relative;
+}
+.cv__plain li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.58rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--rust);
+}
+.cv__panel .cv__chips {
+  margin-top: 0;
+}
+
+/* ------------------------------------------------------------ print -- */
+
+@page {
+  size: A4;
+  margin: 14mm 15mm;
+}
+
+@media print {
+  :root {
+    --shell: 100%;
+    --gutter: 0;
+  }
+
+  html,
+  body,
+  .cv {
+    background: #fff !important;
+    color: #000;
+    font-size: 10.5pt;
+  }
+
+  /* Chrome and Firefox drop background colours by default; ask nicely. */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .nav,
+  .drawer,
+  .progress,
+  .footer,
+  .skip-link,
+  .backlink,
+  .cv__print,
+  .lightbox {
+    display: none !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .cv__masthead {
+    background: #fff !important;
+    color: #000;
+    padding: 0 0 10mm;
+    border-bottom: 1.5pt solid #14181d;
+  }
+  .cv__masthead h1 {
+    color: #000 !important;
+    font-size: 24pt;
+    margin-bottom: 2pt;
+  }
+  .cv__title {
+    color: #a85e2e !important;
+    font-size: 12pt;
+    margin-bottom: 6pt;
+  }
+  .cv__summary {
+    color: #333 !important;
+    font-size: 9.5pt;
+    line-height: 1.5;
+    max-width: none;
+  }
+
+  .cv__id {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 52mm;
+    gap: 8mm;
+  }
+  .cv__meta {
+    gap: 1pt;
+  }
+  .cv__meta a {
+    border: 0;
+    background: none !important;
+    color: #000 !important;
+    padding: 1pt 0;
+    font-size: 9pt;
+  }
+  .cv__meta a span {
+    color: #a85e2e !important;
+    font-size: 7pt;
+  }
+
+  .cv__body-grid {
+    display: block;
+    padding: 8mm 0 0;
+  }
+  .cv__aside {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5mm;
+    margin-top: 8mm;
+    break-inside: avoid;
+  }
+  .cv__panel {
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    background: none !important;
+  }
+
+  .cv__section {
+    margin-bottom: 7mm;
+    break-inside: avoid-page;
+  }
+  .cv__h2 {
+    font-size: 8.5pt;
+    color: #a85e2e !important;
+    border-bottom: 0.5pt solid #999;
+    margin-bottom: 4mm;
+  }
+  .cv__entries {
+    gap: 5mm;
+  }
+  .cv__entry {
+    grid-template-columns: 30mm minmax(0, 1fr);
+    gap: 2mm 5mm;
+  }
+  .cv__what h3 {
+    font-size: 11pt;
+  }
+  .cv__org {
+    color: #444 !important;
+    font-size: 9pt;
+  }
+  .cv__body,
+  .cv__bullets li,
+  .cv__plain li {
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: #222;
+  }
+  .chip {
+    background: none !important;
+    border: 0.5pt solid #bbb;
+    color: #444 !important;
+    font-size: 7.5pt;
+    padding: 0.5pt 3pt;
+  }
+
+  /* Spell out destination URLs — a printed link is useless otherwise. */
+  .cv__main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #666;
+  }
+}
+
+.cv__updated {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.32);
+  margin-top: 1.25rem;
+}
+@media print {
+  .cv__updated {
+    color: #666 !important;
+    font-size: 8pt;
+    margin-top: 3pt;
+  }
+}
+
+/* Unfilled placeholders — loud on purpose. Delete the TODO text in
+   data/cv.mjs and these disappear on the next build. */
+.todo {
+  background: #fff3cd;
+  color: #7a5200;
+  border: 1px dashed #d4a017;
+  border-radius: 4px;
+  padding: 0 0.35em;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  font-weight: 600;
+}
+@media print {
+  .todo {
+    background: none !important;
+    border: 0.5pt dashed #999;
+    color: #666 !important;
+  }
+}
