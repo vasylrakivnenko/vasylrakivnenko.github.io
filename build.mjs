@@ -1,33 +1,20 @@
 /* ==========================================================================
    Static site generator. No dependencies — `node build.mjs` and you're done.
 
-     data/site.mjs  +  data/cv.mjs   ->   index.html
-                                          cv/index.html
-                                          sectors/<slug>/index.html
-                                          404.html
-                                          sitemap.xml
+     data/site.mjs + data/projects.mjs + data/cv.mjs
+        ->  index.html · cv/index.html · 404.html · sitemap.xml
 
    Every page is fully rendered HTML: no client-side routing, no hydration,
    nothing to wait for. assets/site.css and assets/site.js are hand-authored
    and simply copied through by git — this script never touches them.
    ========================================================================== */
 
-import { writeFile, mkdir, rm } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import {
-  site,
-  nav,
-  hero,
-  stackSection,
-  about,
-  research,
-  projects,
-  now,
-  contact,
-  sectors,
-} from "./data/site.mjs";
+import { site, nav, hero, about, research, contact } from "./data/site.mjs";
+import { projects, sectorLabels } from "./data/projects.mjs";
 import { cv } from "./data/cv.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -118,45 +105,19 @@ function head({ title, description, path, extraCss = "" }) {
 }
 
 function navbar() {
-  const links = (items) =>
-    list(
-      items,
-      (l) => `<a class="nav__link" href="${l.href}">${esc(l.label)}</a>`,
-    );
-
-  const sectorItems = list(
-    sectors,
-    (s) => `<a class="nav__menu-item" href="/sectors/${s.slug}/">
-<span><strong>${esc(s.label)}</strong><span>${esc(s.desc)}</span></span>
-${icon("arrowRight")}
-</a>`,
+  const links = list(
+    nav,
+    (l) => `<a class="nav__link" href="${l.href}">${esc(l.label)}</a>`,
   );
-
   return `<header class="nav">
 <div class="nav__inner">
   <a class="brand" href="/">
     <span class="brand__name">${esc(site.name)}</span>
     <span class="brand__role">${esc(site.role)}</span>
   </a>
-
-  <nav class="nav__links" aria-label="Primary">
-    ${links(nav.before)}
-    <div class="nav__drop">
-      <button class="nav__drop-btn" type="button" aria-expanded="false" aria-haspopup="true">Sectors ${icon("chevronDown")}</button>
-      <div class="nav__menu">
-        <div class="nav__menu-rule"></div>
-        <div class="nav__menu-body">
-          <p class="nav__menu-label">Portfolio by industry</p>
-          ${sectorItems}
-          <div class="nav__menu-foot">${esc(site.name)} · ${esc(site.role)}</div>
-        </div>
-      </div>
-    </div>
-    ${links(nav.after)}
-  </nav>
-
+  <nav class="nav__links" aria-label="Primary">${links}</nav>
   <div class="nav__actions">
-    <a class="btn btn--blue nav__cta" href="${site.calendly}" target="_blank" rel="noopener noreferrer">Let’s talk</a>
+    <a class="btn btn--blue nav__cta" href="mailto:${site.email}">Get in touch</a>
     <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">${icon("menu")}</button>
   </div>
 </div>
@@ -170,24 +131,10 @@ ${icon("arrowRight")}
       <button class="drawer__close" type="button" aria-label="Close menu">${icon("x")}</button>
     </div>
     <nav class="drawer__nav" aria-label="Mobile">
-      ${list(nav.before, (l) => `<a href="${l.href}">${esc(l.label)}</a>`)}
-      <button class="drawer__toggle" type="button" aria-expanded="false" aria-controls="drawer-sectors">
-        <span>Sectors</span>${icon("chevronDown")}
-      </button>
-      <div class="drawer__sub" id="drawer-sectors" hidden>
-        <div class="drawer__sub-rule"></div>
-        ${list(
-          sectors,
-          (s) => `<a href="/sectors/${s.slug}/">
-<span><strong>${esc(s.label)}</strong><span>${esc(s.desc)}</span></span>${icon("arrowRight")}
-</a>`,
-        )}
-      </div>
-      ${list(nav.after, (l) => `<a href="${l.href}">${esc(l.label)}</a>`)}
+      ${list(nav, (l) => `<a href="${l.href}">${esc(l.label)}</a>`)}
     </nav>
     <div class="drawer__foot">
-      <a class="btn btn--blue" href="${site.calendly}" target="_blank" rel="noopener noreferrer">Let’s talk</a>
-      <p>30 minutes. No deck, no obligation.</p>
+      <a class="btn btn--blue" href="mailto:${site.email}">Get in touch</a>
     </div>
   </div>
 </div>`;
@@ -199,17 +146,15 @@ function footer() {
   <div class="footer__top">
     <div class="footer__brand">
       <b>${esc(site.name)} — ${esc(site.role)}</b>
-      <p>Enterprise AI systems: agentic workflows, retrieval, evaluation, and the infrastructure that keeps them running.</p>
     </div>
     <div class="footer__links">
       <a href="mailto:${site.email}">${icon("mail")}${esc(site.email)}</a>
       <a href="${site.github}" target="_blank" rel="noopener noreferrer">${icon("github")}GitHub</a>
-      <a href="${site.x}" target="_blank" rel="noopener noreferrer">${xLogo()}X / Twitter</a>
       <a href="${site.linkedin}" target="_blank" rel="noopener noreferrer">${icon("linkedin")}LinkedIn</a>
       <a href="/cv/">${icon("printer")}CV</a>
     </div>
   </div>
-  <div class="footer__base">© ${new Date().getFullYear()} ${esc(site.name)}. All rights reserved.</div>
+  <div class="footer__base">© ${new Date().getFullYear()} ${esc(site.name)}</div>
 </div>
 </footer>
 <script src="/assets/site.js" defer></script>
@@ -217,7 +162,7 @@ function footer() {
 </html>`;
 }
 
-/* ------------------------------------------------------ home sections -- */
+/* ------------------------------------------------------------ sections -- */
 
 function heroSection() {
   return `<section class="hero">
@@ -230,61 +175,12 @@ function heroSection() {
       <h1>${esc(hero.headline)} <br class="hide-sm"><span class="accent">${esc(hero.headlineAccent)}</span></h1>
       <p class="hero__lede">${esc(hero.lede)}</p>
       <div class="hero__actions">
-        <a class="btn btn--rust" href="#portfolio">See what I’ve built ${icon("arrowDown")}</a>
-        <a class="btn btn--ghost-light" href="/cv/">Read my CV ${icon("arrowRight")}</a>
+        <a class="btn btn--rust" href="#work">See my work ${icon("arrowDown")}</a>
+        <a class="btn btn--ghost-light" href="/cv/">My CV ${icon("arrowRight")}</a>
       </div>
       <p class="hero__stack">${hero.stack.map((s) => esc(s)).join(' <span class="tick">/</span> ')}</p>
     </div>
   </div>
-</section>`;
-}
-
-function stackDiagram() {
-  const layers = list(
-    stackSection.layers,
-    (l) => `<button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="${esc(l.num)}" data-name="${esc(l.name)}"
-  data-headline="${esc(l.headline)}" data-detail="${esc(l.detail)}"
-  data-stack="${esc(l.stack.join("|"))}"
-  data-evidence="${esc(l.evidence ? l.evidence.label : "")}"
-  data-evidence-href="${esc(l.evidence ? l.evidence.href : "")}">
-  <span class="layer__num">${esc(l.num)}</span>
-  <span>
-    <span class="layer__name">${esc(l.name)}</span>
-    <span class="layer__hint">${esc(l.hint)}</span>
-  </span>
-  ${l.evidence ? `<span class="layer__dot" title="Linked work at this layer"></span>` : ""}
-</button>`,
-  );
-
-  // The panel is server-rendered with layer 06 so the section is meaningful
-  // before (and without) JavaScript.
-  const first = stackSection.layers[0];
-  const evidence = (l) =>
-    l.evidence
-      ? `<a class="layerpanel__evidence" href="${l.evidence.href}" target="_blank" rel="noopener noreferrer">${esc(l.evidence.label)} ${icon("arrowRight")}</a>`
-      : "";
-
-  return `<section class="section section--cool" id="build">
-<div class="shell">
-  <div class="section__head" data-reveal>
-    <p class="eyebrow">${esc(stackSection.eyebrow)}</p>
-    <h2 class="section__title">${esc(stackSection.title)}</h2>
-    <p class="section__lede">${esc(stackSection.lede)}</p>
-  </div>
-  <div class="stackdiag">
-    <div class="layers" role="tablist" aria-label="The AI stack" data-reveal>${layers}</div>
-    <div class="layerpanel" role="tabpanel" aria-live="polite" data-reveal data-reveal-delay="120">
-      <div class="layerpanel__body">
-        <p class="layerpanel__tag">Layer ${esc(first.num)} · ${esc(first.name)}</p>
-        <h3>${esc(first.headline)}</h3>
-        <p>${esc(first.detail)}</p>
-        ${evidence(first)}
-        <div class="layerpanel__chips">${list(first.stack, (t) => `<span class="chip">${esc(t)}</span>`)}</div>
-      </div>
-    </div>
-  </div>
-</div>
 </section>`;
 }
 
@@ -293,14 +189,11 @@ function aboutSection() {
     [...about.marquee, ...about.marquee],
     (m) => `<span class="marquee__item">${esc(m)}</span>`,
   );
-
   const stats = list(about.stats, (s) =>
     typeof s.value === "number"
       ? `<div class="stat"><b data-count="${s.value}" data-suffix="${esc(s.suffix || "")}">0${esc(s.suffix || "")}</b><span>${esc(s.label)}</span></div>`
       : `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`,
   );
-
-  // Server-rendered first four photos: the carousel is an enhancement.
   const firstFour = about.photos.slice(0, 4);
 
   return `<section id="about">
@@ -310,9 +203,7 @@ function aboutSection() {
     <div class="about">
       <div data-reveal>
         <h2>${esc(about.title)}</h2>
-        <p class="about__serif">${esc(about.paragraphs[0])}</p>
-        <p class="about__body">${esc(about.paragraphs[1])}</p>
-        <p class="about__body">${esc(about.paragraphs[2])}</p>
+        ${list(about.paragraphs, (t, i) => `<p class="${i === 0 ? "about__serif" : "about__body"}">${esc(t)}</p>`)}
       </div>
       <div data-reveal data-reveal-delay="120" data-gallery="${attr(about.photos)}">
         <div class="gallery__head">
@@ -344,124 +235,57 @@ function aboutSection() {
 </section>`;
 }
 
+/* One line of what it is, one line of what it changed. That's the whole row. */
+function workSection() {
+  return `<section class="section section--cool" id="work">
+<div class="shell">
+  <div class="section__head" data-reveal>
+    <h2 class="section__title">Portfolio</h2>
+    <p class="section__lede">Systems that went into production. Most of it is under NDA, so the work is described and the clients are not.</p>
+  </div>
+  <ol class="work">
+    ${list(
+      projects,
+      (p, i) => `<li class="work__item" data-reveal data-reveal-delay="${Math.min(i, 4) * 50}">
+  <div class="work__head">
+    <h3>${esc(p.title)}</h3>
+    <span class="work__tag">${esc(sectorLabels[p.sector] ?? p.sector)}</span>
+  </div>
+  <p class="work__meta">${esc(p.meta)}</p>
+  <p class="work__one">${esc(p.one)}</p>
+  ${/^TODO/.test(p.outcome) ? "" : `<p class="work__outcome">${esc(p.outcome)}</p>`}
+</li>`,
+    )}
+  </ol>
+</div>
+</section>`;
+}
+
 function researchSection() {
-  const card = (c, i) => {
-    const inner = `<p class="rcard__kind">${esc(c.kind)}</p>
-  <h3>${esc(c.title)}</h3>
-  <p>${esc(c.body)}</p>
-  <p class="rcard__meta">${esc(c.meta)}</p>`;
-    return c.href
-      ? `<a class="rcard rcard--link" href="${c.href}" target="_blank" rel="noopener noreferrer" data-reveal data-reveal-delay="${i * 80}">${inner}<span class="rcard__go">${icon("arrowRight")}</span></a>`
-      : `<article class="rcard" data-reveal data-reveal-delay="${i * 80}">${inner}</article>`;
+  const MONTH = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
+  const ts = (d) => {
+    const [m, y] = String(d).split(" ");
+    return Number(y) * 12 + MONTH.indexOf(m);
   };
-
-  const row = (cls, left, title, where, href) => {
-    const body = `<span class="${cls}__meta">${esc(left)}</span>
-  <span><span class="${cls}__title">${esc(title)}</span><span class="${cls}__where">${esc(where)}</span></span>`;
-    return href
-      ? `<a class="${cls} ${cls}--link" href="${href}" target="_blank" rel="noopener noreferrer">${body}${icon("arrowRight", "row__go")}</a>`
-      : `<div class="${cls}">${body}</div>`;
-  };
-
+  const rows = [
+    ...research.items,
+    ...research.blog.map((b) => ({ ...b, kind: "Blog" })),
+  ].sort((a, b) => ts(b.date) - ts(a.date));
   return `<section class="section section--ink" id="research">
 <div class="shell">
   <div class="section__head" data-reveal>
-    <p class="eyebrow">${esc(research.eyebrow)}</p>
     <h2 class="section__title">${esc(research.title)}</h2>
     <p class="section__lede">${esc(research.lede)}</p>
   </div>
-  <div class="research">${list(research.cards, card)}</div>
-
-  <div class="stream" data-reveal>
-    <div class="stream__head">
-      <h3>${esc(research.writingTitle)} <span>${research.writing.length}</span></h3>
-      <p>${esc(research.writingNote)}</p>
-    </div>
-    <div class="stream__rows">
-      ${list(research.writing, (w) => row("row", w.date, w.title, w.where, w.href))}
-    </div>
-  </div>
-
-  <div class="stream" data-reveal>
-    <div class="stream__head">
-      <h3>${esc(research.talksTitle)} <span>${research.talks.length}</span></h3>
-    </div>
-    <div class="stream__rows">
-      ${list(research.talks, (t) => row("row", t.venue, t.title, t.where, t.href))}
-    </div>
-  </div>
-</div>
-</section>`;
-}
-
-function projectCard(p, i) {
-  const label = sectors.find((s) => s.slug === p.sector)?.label ?? p.sector;
-  const links = (p.links || [])
-    .map(
-      (l) =>
-        `<a class="project__link" href="${l.href}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ${icon("arrowRight")}</a>`,
-    )
-    .join("");
-
-  return `<article class="project" data-sector="${esc(p.sector)}" data-reveal data-reveal-delay="${(i % 2) * 80}">
-  <span class="project__index" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
-  <div class="project__top">
-    <span class="project__sector">${esc(label)}</span>
-    ${p.years ? `<span class="project__years">${esc(p.years)}</span>` : ""}
-  </div>
-  <h3>${esc(p.title)}</h3>
-  <p class="project__org"><b>${esc(p.role)}</b> · ${esc(p.org)}</p>
-  <p class="project__one">${esc(p.one)}</p>
-  ${p.metric ? `<p class="project__metric">${esc(p.metric)}</p>` : ""}
-  ${links ? `<div class="project__links">${links}</div>` : ""}
-  <div class="project__stack">${list(p.stack, (s) => `<span class="chip">${esc(s)}</span>`)}</div>
-</article>`;
-}
-
-function portfolioSection() {
-  const counts = {};
-  projects.forEach((p) => (counts[p.sector] = (counts[p.sector] || 0) + 1));
-  const used = sectors.filter((s) => counts[s.slug]);
-
-  const filters = [
-    `<button type="button" class="filter" data-sector="all" aria-pressed="true">All work<span class="filter__count">${projects.length}</span></button>`,
-    ...used.map(
-      (s) =>
-        `<button type="button" class="filter" data-sector="${s.slug}" aria-pressed="false">${esc(s.label)}<span class="filter__count">${counts[s.slug]}</span></button>`,
-    ),
-  ].join("");
-
-  return `<section class="section section--cream" id="portfolio" data-portfolio>
-<div class="shell">
-  <div class="section__head" data-reveal>
-    <p class="eyebrow">Portfolio</p>
-    <h2 class="section__title">Selected work</h2>
-    <p class="section__lede">Filter by industry, or open a sector from the Sectors menu for the full picture. Role is stated on every entry — I would rather tell you exactly what I owned than let a logo imply it.</p>
-  </div>
-  <div class="filters" role="group" aria-label="Filter portfolio by sector" data-reveal>${filters}</div>
-  <div class="projects">
-    ${list(projects, projectCard)}
-    <p class="projects__empty" hidden>Nothing published in this sector yet — but the engineering is the same. <a href="${site.calendly}" target="_blank" rel="noopener noreferrer">Let’s talk about your case.</a></p>
-  </div>
-  <div class="portfolio__foot" data-reveal>
-    <p>Some engagements are under NDA and can’t be described here. Happy to walk through the architecture of any of them on a call.</p>
-    <a class="btn btn--ghost" href="/cv/">Full CV ${icon("arrowRight")}</a>
-  </div>
-</div>
-</section>`;
-}
-
-function nowSection() {
-  return `<section class="now" id="now">
-<div class="shell">
-  <div class="now__inner" data-reveal>
-    <div class="now__head">
-      <p class="eyebrow">Now</p>
-      <p class="now__updated">Updated ${esc(now.updated)}</p>
-    </div>
-    <ul class="now__list">
-      ${list(now.items, (i) => `<li>${esc(i)}</li>`)}
-    </ul>
+  <div class="stream__rows" data-reveal>
+    ${list(
+      rows,
+      (r) => `<a class="row row--link" href="${r.href}" target="_blank" rel="noopener noreferrer">
+  <span class="row__meta"><b>${esc(r.kind)}</b>${esc(r.date)}</span>
+  <span><span class="row__title">${esc(r.title)}</span><span class="row__where">${esc(r.where)}</span></span>
+  ${icon("arrowRight", "row__go")}
+</a>`,
+    )}
   </div>
 </div>
 </section>`;
@@ -474,13 +298,13 @@ function contactSection() {
 <div class="contact__inner" data-reveal>
   <h2>${esc(contact.title)}</h2>
   <p>${esc(contact.body)}</p>
-  <a class="btn btn--blue" href="${site.calendly}" target="_blank" rel="noopener noreferrer">${esc(contact.cta)} ${icon("arrowRight")}</a>
+  <a class="btn btn--blue" href="mailto:${site.email}">${esc(site.email)} ${icon("arrowRight")}</a>
   <div class="contact__links">
-    <a href="mailto:${site.email}">${esc(site.email)}</a>
+    <a href="${site.calendly}" target="_blank" rel="noopener noreferrer">Book a call</a>
     <span aria-hidden="true">·</span>
-    <a href="${site.linkedin}" target="_blank" rel="noopener noreferrer">linkedin.com/in/rakivnenkov</a>
+    <a href="${site.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <span aria-hidden="true">·</span>
-    <a href="${site.github}" target="_blank" rel="noopener noreferrer">github.com/vasylrakivnenko</a>
+    <a href="${site.github}" target="_blank" rel="noopener noreferrer">GitHub</a>
     <span aria-hidden="true">·</span>
     <a href="/cv/">CV</a>
   </div>
@@ -500,18 +324,10 @@ function homePage() {
     email: "mailto:" + site.email,
     sameAs: [site.linkedin, site.x, site.github, site.scholar],
     description: site.description,
-    knowsAbout: [
-      "Artificial Intelligence",
-      "AI Engineering",
-      "Retrieval-Augmented Generation",
-      "AI Agents",
-      "Machine Learning Evaluation",
-    ],
   };
-
   return (
     head({
-      title: `${site.name} — AI Engineer | Enterprise AI Systems, Agents & Automation`,
+      title: `${site.name} — AI Engineer`,
       description: site.description,
       path: "/",
     }) +
@@ -520,120 +336,10 @@ function homePage() {
     `<main id="main">` +
     heroSection() +
     aboutSection() +
-    stackDiagram() +
+    workSection() +
     researchSection() +
-    nowSection() +
-    portfolioSection() +
     contactSection() +
     `</main>` +
-    footer()
-  );
-}
-
-function sectorPage(s) {
-  const mine = projects.filter((p) => p.sector === s.slug);
-  const others = sectors.filter((o) => o.slug !== s.slug);
-
-  const work = mine.length
-    ? `<div class="projects">${list(mine, projectCard)}</div>`
-    : `<div class="card" style="max-width:44rem">
-  <h3>No published project in this sector yet</h3>
-  <p>Which is worth saying plainly rather than padding the page. The engineering below is the same stack I build everywhere else — and the opportunities are the ones I'd start from if we worked together. <a href="/#portfolio" style="color:var(--blue);font-weight:500">See work in other sectors →</a></p>
-</div>`;
-
-  return (
-    head({
-      title: `AI Engineering for ${s.name} — ${site.name}`,
-      description: s.tagline,
-      path: `/sectors/${s.slug}/`,
-    }) +
-    navbar() +
-    `<main id="main">
-
-<section class="subhero">
-  <div class="subhero__inner">
-    <a class="backlink" href="/">${icon("arrowLeft")}Back to home</a>
-    <p class="eyebrow">Portfolio · ${esc(s.name)}</p>
-    <h1>${esc(s.tagline)}</h1>
-    <p class="subhero__lede">${esc(s.intro)}</p>
-    <div class="subhero__stat">
-      <b>${esc(s.stat.value)}</b><span>${esc(s.stat.label)}</span>
-    </div>
-    <div class="subhero__actions">
-      <a class="btn btn--rust" href="${site.calendly}" target="_blank" rel="noopener noreferrer">Let’s talk ${icon("arrowRight")}</a>
-      <a class="btn btn--ghost-light" href="/#portfolio">All work ${icon("arrowRight")}</a>
-    </div>
-  </div>
-</section>
-
-<section class="section section--cream">
-  <div class="shell">
-    <div class="section__head" data-reveal>
-      <p class="eyebrow">Work in this sector</p>
-      <h2 class="section__title">${
-        mine.length
-          ? `What I’ve built in ${esc(s.name.toLowerCase())}`
-          : `Work in ${esc(s.name.toLowerCase())}`
-      }</h2>
-    </div>
-    ${work}
-  </div>
-</section>
-
-<section class="section section--ink">
-  <div class="shell">
-    <div class="section__head" data-reveal>
-      <p class="eyebrow">Highest-value opportunities</p>
-      <h2 class="section__title">Where AI creates the most value</h2>
-    </div>
-    <div class="grid grid--2">
-      ${list(
-        s.opportunities,
-        (o, i) => `<article class="opp" data-reveal data-reveal-delay="${i * 70}">
-  <span class="opp__index" aria-hidden="true">0${i + 1}</span>
-  <h3>${esc(o.title)}</h3>
-  <p>${esc(o.body)}</p>
-</article>`,
-      )}
-    </div>
-  </div>
-</section>
-
-<section class="section section--cool">
-  <div class="shell">
-    <div class="section__head" data-reveal>
-      <p class="eyebrow">Common pain points</p>
-      <h2 class="section__title">Challenges in ${esc(s.name)}</h2>
-    </div>
-    <div class="grid grid--3">
-      ${list(
-        s.challenges,
-        (c, i) =>
-          `<div class="challenge" data-reveal data-reveal-delay="${i * 60}"><p>${esc(c)}</p></div>`,
-      )}
-    </div>
-  </div>
-</section>
-
-<section class="section section--cream">
-  <div class="shell">
-    <p class="eyebrow">Explore other sectors</p>
-    <div class="sectorpills">
-      ${list(others, (o) => `<a href="/sectors/${o.slug}/">${esc(o.label)} ${icon("arrowRight")}</a>`)}
-    </div>
-  </div>
-</section>
-
-<section class="closer">
-  <div class="closer__inner" data-reveal>
-    <p class="eyebrow">Let’s talk</p>
-    <h2>Ready to see what AI can actually do<br class="hide-sm"> for your ${esc(s.name.toLowerCase())} operation?</h2>
-    <p>30 minutes on your systems and your bottlenecks. No deck, no pitch, no obligation.</p>
-    <a class="btn btn--rust" href="${site.calendly}" target="_blank" rel="noopener noreferrer">Book a call ${icon("arrowRight")}</a>
-  </div>
-</section>
-
-</main>` +
     footer()
   );
 }
@@ -740,10 +446,10 @@ function notFoundPage() {
   <div class="subhero__inner">
     <p class="eyebrow">404</p>
     <h1>That page doesn’t exist.</h1>
-    <p class="subhero__lede">The link is broken or the page has moved. Everything lives on the home page — or jump straight to the work.</p>
+    <p class="subhero__lede">The link is broken or the page has moved.</p>
     <div class="subhero__actions">
       <a class="btn btn--rust" href="/">Home ${icon("arrowRight")}</a>
-      <a class="btn btn--ghost-light" href="/#portfolio">Portfolio ${icon("arrowRight")}</a>
+      <a class="btn btn--ghost-light" href="/#work">Portfolio ${icon("arrowRight")}</a>
     </div>
   </div>
 </section>
@@ -753,19 +459,11 @@ function notFoundPage() {
 }
 
 function sitemap() {
-  const urls = [
-    "/",
-    "/cv/",
-    ...sectors.map((s) => `/sectors/${s.slug}/`),
-  ];
   const today = new Date().toISOString().slice(0, 10);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
-  .map(
-    (u) =>
-      `  <url><loc>${site.origin}${u}</loc><lastmod>${today}</lastmod></url>`,
-  )
+${["/", "/cv/"]
+  .map((u) => `  <url><loc>${site.origin}${u}</loc><lastmod>${today}</lastmod></url>`)
   .join("\n")}
 </urlset>
 `;
@@ -780,19 +478,24 @@ async function emit(relPath, contents) {
   console.log("  ✓", relPath);
 }
 
+const missing = projects.filter((p) => /^TODO/.test(p.outcome));
+
 console.log("Building site…");
-
-// Clear out stale sector directories so a renamed slug can't linger.
-await rm(join(ROOT, "sectors"), { recursive: true, force: true });
-
 await emit("index.html", homePage());
 await emit("cv/index.html", cvPage());
-for (const s of sectors) await emit(`sectors/${s.slug}/index.html`, sectorPage(s));
 await emit("404.html", notFoundPage());
 await emit("sitemap.xml", sitemap());
 await emit(
   "robots.txt",
   `User-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`,
 );
-
 console.log("Done.");
+
+if (missing.length) {
+  console.log(
+    `\n⚠  ${missing.length} of ${projects.length} portfolio entries have no outcome yet.`,
+  );
+  console.log("   They render without an outcome line. Add one in data/projects.mjs:");
+  missing.forEach((p) => console.log(`   · ${p.title}`));
+  console.log("");
+}

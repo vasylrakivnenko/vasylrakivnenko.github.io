@@ -2,65 +2,46 @@
 
 Personal site — Vasyl Rakivnenko, AI Engineer.
 
-Static HTML, hand-written CSS, ~11 KB of vanilla JS. No framework, no
-dependencies, no `node_modules`. Deploys straight from `main` to GitHub Pages.
+Two pages. Static HTML, hand-written CSS, a little vanilla JS. No framework,
+no dependencies, no build toolchain beyond Node. Deploys from `main` to
+GitHub Pages.
+
+```
+/        hero · About me · Portfolio · Research & Blog · contact
+/cv/     printable CV (Cmd-P gives a clean A4)
+```
 
 ## Editing
 
-**All content lives in `data/`. You should almost never edit HTML directly.**
+All content is in `data/`. Don't edit the HTML — it's generated.
 
 | File | What's in it |
 | --- | --- |
-| `data/site.mjs` | Nav, hero, What I build (the six-layer stack), About, research, writing, talks, Now, portfolio, sector pages |
+| `data/site.mjs` | Nav, hero, About me, Research & Blog, contact |
+| `data/projects.mjs` | The portfolio list |
 | `data/cv.mjs` | Everything on `/cv/` |
 
-Change the data, then regenerate:
+Then:
 
 ```sh
-node build.mjs
+node build.mjs                 # regenerate index.html, cv/, 404, sitemap
+python3 -m http.server 8899    # preview at localhost:8899
 ```
 
-That writes `index.html`, `cv/index.html`, `sectors/<slug>/index.html`,
-`404.html`, `sitemap.xml` and `robots.txt`. Commit the generated files — GitHub
-Pages serves them as-is.
+Commit the generated files; Pages serves them as-is.
 
-To preview locally:
+## Notes
 
-```sh
-python3 -m http.server 8899   # then open http://localhost:8899
-```
-
-## Layout
-
-```
-build.mjs           generator — templates + inline SVG icons
-data/               all content
-assets/site.css     design system (tokens at the top of the file)
-assets/cv.css       /cv/ layout + the @media print rules
-assets/site.js      progressive enhancement only; the site works without it
-```
-
-## Things worth knowing
-
-- **`TODO:` markers render on the page.** Anything still unfilled in
-  `data/cv.mjs` shows as a yellow dashed chip on `/cv/`. Fill in the copy and
-  the marker disappears on the next build. Don't ship with them visible.
-- **The CV needs no PDF.** `/cv/` prints to a clean A4 through the print
-  stylesheet — the "Save as PDF" button just calls `window.print()`. The web
-  page can never drift out of sync with the file people download.
-- **Adding portfolio work:** append to `projects` in `data/site.mjs`. The
-  `sector` field must match a `slug` in `sectors`. Sector filter chips, per-
-  sector page listings and the counts all derive from that automatically; a
-  sector with no projects renders an honest "nothing published here yet" card
-  instead of filler.
-- **Keep `now.updated` current.** A stale `Now` block is worse than none.
-- **The six layers carry evidence links.** Each entry in `stackSection.layers`
-  takes an optional `evidence: { label, href }` pointing at real published work
-  at that layer; layers with one show a small rust dot in the list. Two of six
-  currently have none — leave them `null` rather than linking something
-  tangential. That contrast is what makes the other four mean anything.
-- **The hero background treatment is deliberate** — the speaker photo, the
-  gradient stack and the 22-second ken-burns drift are carried over from the
-  previous design on purpose. See the note above `.hero` in `site.css`.
-- **The Open Graph card** (`opengraph.jpg`, 1200×630) is a rendered image, not
-  a screenshot. Regenerate it if the headline changes.
+- **Portfolio entries are two lines and an outcome.** One line of what it is,
+  one of what it changed. Resist adding architecture or implementation detail
+  — that conversation belongs on a call, where you control how much you give.
+- **An entry whose `outcome` starts with `TODO` renders without an outcome
+  line**, and `node build.mjs` prints a list of which ones. Filling those in is
+  the highest-value edit available on this site. Never estimate a figure: it's
+  the first thing a hiring manager or procurement team checks.
+- **Research and blog are one dated stream**, sorted newest-first at build
+  time from `research.items` (papers, patents) and `research.blog`.
+- **The hero treatment is deliberate** — the speaker photo, gradient stack and
+  22-second ken-burns drift. See the note above `.hero` in `assets/site.css`.
+- **`opengraph.jpg`** (1200x630) is a rendered card, not a screenshot.
+  Regenerate it if the headline changes.

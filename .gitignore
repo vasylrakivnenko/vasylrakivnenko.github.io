@@ -1,0 +1,8 @@
+# Source material and saved pages — kept locally, never published.
+# This repo IS the public website: anything committed is served at
+# vasylrakivnenko.github.io/<path>.
+lafla*
+*_files/
+*.md.html
+node_modules/
+.DS_Store
