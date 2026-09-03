@@ -2022,3 +2022,46 @@ h2.section__title {
 .modal__outcome[hidden] {
   display: none;
 }
+
+/* ------------------------------------------------- collapsible stream -- */
+/* Rendered fully expanded; JS collapses it on load, so with JS off the
+   whole list is still there rather than three rows and no way through. */
+
+.stream__rows.is-collapsed > .row:nth-child(n + 4) {
+  display: none;
+}
+
+.stream__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    color 0.2s;
+}
+.stream__toggle:hover {
+  border-color: var(--rust);
+  background: rgba(192, 112, 58, 0.12);
+  color: #fff;
+}
+.stream__toggle[hidden] {
+  display: none;
+}
+.stream__toggle svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--rust);
+  transition: transform 0.25s var(--ease);
+}
+.stream__toggle.is-open svg {
+  transform: rotate(180deg);
+}

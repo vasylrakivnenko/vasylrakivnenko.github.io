@@ -298,7 +298,7 @@ function researchSection() {
     <h2 class="section__title">${esc(research.title)}</h2>
     <p class="section__lede">${esc(research.lede)}</p>
   </div>
-  <div class="stream__rows" data-reveal>
+  <div class="stream__rows" data-collapse="3" data-reveal>
     ${list(
       rows,
       (r) => `<a class="row row--link" href="${r.href}" target="_blank" rel="noopener noreferrer">
@@ -308,6 +308,10 @@ function researchSection() {
 </a>`,
     )}
   </div>
+  <button class="stream__toggle" type="button" hidden
+    data-more="Show all ${rows.length}" data-less="Show fewer">
+    <span></span>${icon("chevronDown")}
+  </button>
 </div>
 </section>`;
 }

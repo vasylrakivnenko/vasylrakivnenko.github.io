@@ -104,6 +104,7 @@ export const about = {
     { value: 170, suffix: "+", label: "people hired & managed" },
     { value: "$10M+", label: "revenue bootstrapped" },
     { value: 3, label: "times Forbes recognised" },
+    { value: 11, label: "years in tech & business leadership" },
   ],
 };
 

@@ -252,6 +252,38 @@
   }
 
 
+
+  /* -------------------------------------------------- collapsed stream -- */
+
+  var stream = $("[data-collapse]");
+  var streamToggle = $(".stream__toggle");
+  if (stream && streamToggle) {
+    var rowCount = $$(".row", stream).length;
+    var keep = parseInt(stream.getAttribute("data-collapse"), 10) || 3;
+    if (rowCount > keep) {
+      var label = $("span", streamToggle);
+      var setCollapsed = function (collapsed) {
+        stream.classList.toggle("is-collapsed", collapsed);
+        streamToggle.classList.toggle("is-open", !collapsed);
+        streamToggle.setAttribute("aria-expanded", String(!collapsed));
+        label.textContent = streamToggle.getAttribute(
+          collapsed ? "data-more" : "data-less",
+        );
+      };
+      setCollapsed(true);
+      streamToggle.hidden = false;
+      on(streamToggle, "click", function () {
+        var collapsing = !stream.classList.contains("is-collapsed");
+        setCollapsed(collapsing);
+        if (collapsing) {
+          // keep the button under the thumb instead of jumping up the page
+          var top = stream.getBoundingClientRect().top;
+          if (top < 80) window.scrollBy(0, top - 90);
+        }
+      });
+    }
+  }
+
   /* --------------------------------------------------- portfolio modal -- */
 
   var modal = $(".modal");
