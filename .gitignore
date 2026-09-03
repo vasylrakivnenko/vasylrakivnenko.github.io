@@ -1,8 +1,14 @@
-# Source material and saved pages — kept locally, never published.
-# This repo IS the public website: anything committed is served at
-# vasylrakivnenko.github.io/<path>.
+# This repo IS the public website: every committed file is served at
+# vasylrakivnenko.github.io/<path>. Keep source material out of it.
+
+# Saved pages and workspace exports
 lafla*
 *_files/
 *.md.html
+
+# Working documents — README is the only markdown that belongs here
+*.md
+!README.md
+
 node_modules/
 .DS_Store
