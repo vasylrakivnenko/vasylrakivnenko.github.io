@@ -39,10 +39,15 @@ Commit the generated files; Pages serves them as-is.
 - **Each sector has an accent colour** in `sectors` in `data/projects.mjs`
   (`color` for the chip and hairline, `tint` for backgrounds). Adding a sector
   means adding an entry there.
-- **An entry whose `outcome` starts with `TODO` renders without an outcome
-  line**, and `node build.mjs` prints a list of which ones. Filling those in is
-  the highest-value edit available on this site. Never estimate a figure: it's
-  the first thing a hiring manager or procurement team checks.
+- **Nothing goes live without a defensible outcome.** A project with
+  `draft: true` stays in `data/projects.mjs`, fully written, but is not
+  rendered. `node build.mjs` lists what's held back. When you have the number:
+  replace `outcome`, delete the `draft` line. One edit, per project, when the
+  evidence exists.
+- **The build fails if the word `TODO` reaches a generated page.** That guard
+  is the point — it means the site cannot drift back into placeholders.
+- **Never estimate a figure.** It's the first thing a hiring manager or a
+  procurement team checks.
 - **Research and blog are one dated stream**, sorted newest-first at build
   time from `research.items` (papers, patents) and `research.blog`.
 - **The hero treatment is deliberate** — the speaker photo, gradient stack and

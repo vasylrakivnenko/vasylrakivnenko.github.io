@@ -238,6 +238,7 @@ function aboutSection() {
 /* A 2-up grid of equal-height cards. The card shows the short read; the
    full description opens in a dialog, so the section stays scannable. */
 function workSection() {
+  const live = projects.filter((p) => !p.draft);
   const card = (p, i) => {
     const s = sectors[p.sector] ?? { label: p.sector, color: "#5D6B7A", tint: "#F1F3F6" };
     const hasOutcome = !/^TODO/.test(p.outcome);
@@ -263,7 +264,7 @@ function workSection() {
     <h2 class="section__title">Portfolio</h2>
     <p class="section__lede">Systems that went into production. Most of it is under NDA, so the work is described and the clients are not.</p>
   </div>
-  <div class="pgrid">${list(projects, card)}</div>
+  <div class="pgrid">${list(live, card)}</div>
 </div>
 
 <div class="modal" hidden>
@@ -498,7 +499,7 @@ async function emit(relPath, contents) {
   console.log("  ✓", relPath);
 }
 
-const missing = projects.filter((p) => /^TODO/.test(p.outcome));
+const held = projects.filter((p) => p.draft);
 
 console.log("Building site…");
 await emit("index.html", homePage());
@@ -511,11 +512,25 @@ await emit(
 );
 console.log("Done.");
 
-if (missing.length) {
+// Nothing ships with a placeholder in it.
+const pages = { "index.html": homePage(), "cv/index.html": cvPage() };
+const dirty = Object.entries(pages).filter(([, html]) => /TODO/.test(html));
+if (dirty.length) {
+  console.error("\n✗ TODO placeholder found in generated output:");
+  dirty.forEach(([f]) => console.error(`   ${f}`));
+  console.error("  Fix it in data/ — nothing ships with a placeholder.\n");
+  process.exit(1);
+}
+
+if (held.length) {
   console.log(
-    `\n⚠  ${missing.length} of ${projects.length} portfolio entries have no outcome yet.`,
+    `\n${projects.length - held.length} of ${projects.length} projects live. ${held.length} held back:`,
   );
-  console.log("   They render without an outcome line. Add one in data/projects.mjs:");
-  missing.forEach((p) => console.log(`   · ${p.title}`));
-  console.log("");
+  held.forEach((p) => {
+    const why = (p.draft === true ? "" : String(p.draft)) || "";
+    console.log(`   · ${p.title}`);
+  });
+  console.log(
+    "\n   Each needs one line from you. Replace `outcome`, delete `draft: true`.\n",
+  );
 }

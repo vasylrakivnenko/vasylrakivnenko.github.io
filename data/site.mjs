@@ -38,14 +38,8 @@ export const hero = {
   headline: "AI is the new electricity.",
   headlineAccent: "Don’t let your business run in the dark.",
   lede: "I build enterprise AI solutions to automate workflows and boost productivity.",
-  stack: [
-    "python",
-    "typescript",
-    "pytorch",
-    "langgraph",
-    "postgres/pgvector",
-    "aws",
-  ],
+  // Only tools that appear in work you've actually shown me.
+  stack: ["python", "flask", "postgres", "pydantic", "claude + gpt", "cloud run"],
   // Credential chips used to sit here. With the About block now directly
   // below the hero, they repeated its ticker within one scroll, so the hero
   // ends on the stack line instead. To bring them back, restore a `chips`
@@ -110,7 +104,6 @@ export const about = {
     { value: 170, suffix: "+", label: "people hired & managed" },
     { value: "$10M+", label: "revenue bootstrapped" },
     { value: 3, label: "times Forbes recognised" },
-    { value: 3, label: "public companies helped" },
   ],
 };
 
