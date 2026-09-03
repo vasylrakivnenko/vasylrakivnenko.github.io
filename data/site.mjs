@@ -48,12 +48,10 @@ export const hero = {
     "postgres/pgvector",
     "aws",
   ],
-  chips: [
-    "AI Technical Lead · Legal Design Lab, Stanford Law",
-    "Instructor · Stanford Continuing Studies",
-    "Research Affiliate · Stanford GSB VCII",
-    "Granted patent · PL247981B1",
-  ],
+  // Credential chips used to sit here. With the About block now directly
+  // below the hero, they repeated its ticker within one scroll, so the hero
+  // ends on the stack line instead. To bring them back, restore a `chips`
+  // array here and re-add the `.hero__chips` div in build.mjs heroSection().
   image: {
     src: "/assets/1702346092406_1781039882681-CreCwZNO.jpg",
     alt: "Vasyl Rakivnenko speaking at Stanford",

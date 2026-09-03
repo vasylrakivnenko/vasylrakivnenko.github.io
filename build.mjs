@@ -245,7 +245,6 @@ function heroSection() {
         <a class="btn btn--ghost-light" href="/cv/">Read my CV ${icon("arrowRight")}</a>
       </div>
       <p class="hero__stack">${hero.stack.map((s) => esc(s)).join(' <span class="tick">/</span> ')}</p>
-      <div class="hero__chips">${list(hero.chips, (c) => `<span>${esc(c)}</span>`)}</div>
     </div>
   </div>
 </section>`;
@@ -270,7 +269,7 @@ function stackDiagram() {
   // before (and without) JavaScript.
   const first = stackSection.layers[0];
 
-  return `<section class="section section--cream" id="stack">
+  return `<section class="section section--cool" id="stack">
 <div class="shell">
   <div class="section__head" data-reveal>
     <p class="eyebrow">${esc(stackSection.eyebrow)}</p>
@@ -546,12 +545,12 @@ function homePage() {
     navbar() +
     `<main id="main">` +
     heroSection() +
-    stackDiagram() +
-    capabilitiesSection() +
     aboutSection() +
+    capabilitiesSection() +
     researchSection() +
     nowSection() +
     portfolioSection() +
+    stackDiagram() +
     contactSection() +
     `</main>` +
     footer()

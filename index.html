@@ -128,123 +128,8 @@
         <a class="btn btn--ghost-light" href="/cv/">Read my CV <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <p class="hero__stack">python <span class="tick">/</span> typescript <span class="tick">/</span> pytorch <span class="tick">/</span> langgraph <span class="tick">/</span> postgres/pgvector <span class="tick">/</span> aws</p>
-      <div class="hero__chips"><span>AI Technical Lead · Legal Design Lab, Stanford Law</span><span>Instructor · Stanford Continuing Studies</span><span>Research Affiliate · Stanford GSB VCII</span><span>Granted patent · PL247981B1</span></div>
     </div>
   </div>
-</section><section class="section section--cream" id="stack">
-<div class="shell">
-  <div class="section__head" data-reveal>
-    <p class="eyebrow">How I build</p>
-    <h2 class="section__title">Six layers decide whether AI survives contact with production.</h2>
-    <p class="section__lede">Nearly every enterprise AI project that fails, fails in the same place: the gap between a demo that impresses a room and a system that runs on a Tuesday morning without anyone watching. These are the layers that gap is made of. I build all six.</p>
-  </div>
-  <div class="stackdiag">
-    <div class="layers" role="tablist" aria-label="The AI stack" data-reveal><button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="06" data-name="Interface"
-  data-headline="Software people use without being trained to use it." data-detail="The best model in the world is worthless behind a UI nobody opens. I ship AI into the tools your team already lives in — the internal dashboard, the CRM, Slack, the case management system — so adoption is the default rather than a change-management programme."
-  data-stack="React|TypeScript|Streaming UI|Slack / Teams|REST">
-  <span class="layer__num">06</span>
-  <span>
-    <span class="layer__name">Interface</span>
-    <span class="layer__hint">Where people actually meet the system</span>
-  </span>
-</button><button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="05" data-name="Agents &amp; orchestration"
-  data-headline="State machines, not prompt spaghetti." data-detail="Multi-step agents that plan, call your internal tools, recover from failure, and know exactly when to stop and ask a human. Built as explicit, inspectable graphs — so when something goes wrong you can point at the node that did it instead of re-reading a 4,000-token prompt."
-  data-stack="LangGraph|Tool calling|MCP|Queues|Human-in-the-loop">
-  <span class="layer__num">05</span>
-  <span>
-    <span class="layer__name">Agents &amp; orchestration</span>
-    <span class="layer__hint">Planning, tool use, human handoff</span>
-  </span>
-</button><button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="04" data-name="Retrieval &amp; memory"
-  data-headline="Answers with citations, not confident guesses." data-detail="Hybrid search over your own corpus — contracts, tickets, filings, shift reports — with reranking, chunking that respects document structure, and citations on every claim. If the system can’t ground an answer, it says so. That property is what makes it usable in a regulated review."
-  data-stack="pgvector|Hybrid BM25|Rerankers|OCR|Knowledge graphs">
-  <span class="layer__num">04</span>
-  <span>
-    <span class="layer__name">Retrieval &amp; memory</span>
-    <span class="layer__hint">Your documents, made answerable</span>
-  </span>
-</button><button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="03" data-name="Models"
-  data-headline="The right model per task, not one model for everything." data-detail="Frontier models where reasoning matters, small open-weight models where volume and latency matter, fine-tuning only where it demonstrably earns its cost. Structured outputs with schema validation, so downstream code never has to parse prose."
-  data-stack="Claude|Open weights|LoRA / PEFT|vLLM|Structured output">
-  <span class="layer__num">03</span>
-  <span>
-    <span class="layer__name">Models</span>
-    <span class="layer__hint">Routing, fine-tuning, structured output</span>
-  </span>
-</button><button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="02" data-name="Evaluation &amp; guardrails"
-  data-headline="If quality regresses, a dashboard tells you — not a customer." data-detail="Every system ships with a golden dataset, an offline eval suite in CI, and online tracing. Plus the unglamorous safety layer: PII detection and redaction, prompt-injection defence, tenant isolation, cost and latency budgets, and an audit trail that survives a compliance review."
-  data-stack="Eval harnesses|Tracing|Red-teaming|PII redaction|CI">
-  <span class="layer__num">02</span>
-  <span>
-    <span class="layer__name">Evaluation &amp; guardrails</span>
-    <span class="layer__hint">How you know it still works</span>
-  </span>
-</button><button type="button" class="layer" role="tab" aria-selected="false"
-  data-num="01" data-name="Data &amp; infrastructure"
-  data-headline="Boring, observable, and yours to operate." data-detail="Ingestion pipelines, vector and relational stores, deployment into your cloud and your identity provider, monitoring, and cost controls. Handover includes runbooks and a team that can actually run it — the goal is your independence, not a permanent dependency on me."
-  data-stack="Python|Docker|AWS / GCP|Airflow|Observability">
-  <span class="layer__num">01</span>
-  <span>
-    <span class="layer__name">Data &amp; infrastructure</span>
-    <span class="layer__hint">The part nobody demos</span>
-  </span>
-</button></div>
-    <div class="layerpanel" role="tabpanel" aria-live="polite" data-reveal data-reveal-delay="120">
-      <div class="layerpanel__body">
-        <p class="layerpanel__tag">Layer 06 · Interface</p>
-        <h3>Software people use without being trained to use it.</h3>
-        <p>The best model in the world is worthless behind a UI nobody opens. I ship AI into the tools your team already lives in — the internal dashboard, the CRM, Slack, the case management system — so adoption is the default rather than a change-management programme.</p>
-        <div class="layerpanel__chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Streaming UI</span><span class="chip">Slack / Teams</span><span class="chip">REST</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section><section class="section section--cool" id="capabilities">
-<div class="shell">
-  <div class="section__head" data-reveal>
-    <p class="eyebrow">Engineering</p>
-    <h2 class="section__title">What I build</h2>
-    <p class="section__lede">Six systems that come up again and again across legal, clinical, industrial and education settings. Different domains, the same engineering problems underneath.</p>
-  </div>
-  <div class="grid grid--3">
-    <article class="card" data-reveal data-reveal-delay="0">
-  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg></div>
-  <h3>Agentic workflow automation</h3>
-  <p>Multi-step agents that take a real business process end to end — read the input, call your systems, make the call they’re allowed to make, and escalate the rest. Scoped so the blast radius of a mistake is always known in advance.</p>
-  <div class="card__chips"><span class="chip">LangGraph</span><span class="chip">Tool calling</span><span class="chip">MCP</span></div>
-</article><article class="card" data-reveal data-reveal-delay="70">
-  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
-  <h3>Retrieval &amp; document intelligence</h3>
-  <p>Search and question-answering over your own document estate, with citations. Contracts, clinical notes, filings, inspection reports — extracted, structured, and made answerable without shipping your data to somebody else’s training set.</p>
-  <div class="card__chips"><span class="chip">pgvector</span><span class="chip">Rerankers</span><span class="chip">OCR</span></div>
-</article><article class="card" data-reveal data-reveal-delay="140">
-  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></div>
-  <h3>Evaluation &amp; observability</h3>
-  <p>The discipline that separates a product from a demo. Golden datasets, offline evals wired into CI, online tracing and drift alerts. You get a number for “is it working” instead of a vibe.</p>
-  <div class="card__chips"><span class="chip">Eval harnesses</span><span class="chip">Tracing</span><span class="chip">Golden sets</span></div>
-</article><article class="card" data-reveal data-reveal-delay="210">
-  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></svg></div>
-  <h3>Model selection &amp; fine-tuning</h3>
-  <p>Benchmarking your actual task across frontier and open-weight models, then routing by cost, latency and accuracy. Fine-tuning and distillation where the maths works out — and an honest “you don’t need this” where it doesn’t.</p>
-  <div class="card__chips"><span class="chip">LoRA</span><span class="chip">vLLM</span><span class="chip">Distillation</span></div>
-</article><article class="card" data-reveal data-reveal-delay="280">
-  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6l8-3 8 3z"/></svg></div>
-  <h3>Security, privacy &amp; guardrails</h3>
-  <p>PII detection and redaction, tenant isolation, prompt-injection defence, and audit logging designed for people who will one day be asked to explain a decision. I’ve shipped AI in regulated, high-stakes settings and built for that from day one.</p>
-  <div class="card__chips"><span class="chip">PII redaction</span><span class="chip">Isolation</span><span class="chip">Audit trails</span></div>
-</article><article class="card" data-reveal data-reveal-delay="350">
-  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.5-9.17 4.16a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.16a2 2 0 0 1-1.66 0L2 17.5"/></svg></div>
-  <h3>Integration &amp; handover</h3>
-  <p>It runs in your cloud, behind your SSO, in your CI — not on a laptop under my desk. Every engagement ends with runbooks, architecture docs, and a team I’ve trained to extend it without me.</p>
-  <div class="card__chips"><span class="chip">AWS / GCP</span><span class="chip">SSO</span><span class="chip">Runbooks</span></div>
-</article>
-  </div>
-</div>
 </section><section id="about">
 <div class="marquee" aria-hidden="true"><div class="marquee__track"><span class="marquee__item">AI Technical Lead — Legal Design Lab, Stanford Law School</span><span class="marquee__item">Instructor — Stanford Continuing Studies (TECH 43)</span><span class="marquee__item">Research Affiliate — Value Chain Innovation Initiative, Stanford GSB</span><span class="marquee__item">3× Forbes-recognised founder (Poland)</span><span class="marquee__item">170-person company bootstrapped</span><span class="marquee__item">~$10M revenue, zero outside capital</span><span class="marquee__item">Granted patent — PL247981B1</span><span class="marquee__item">Bias in Text Embedding Models — arXiv:2406.12138</span><span class="marquee__item">AI Technical Lead — Legal Design Lab, Stanford Law School</span><span class="marquee__item">Instructor — Stanford Continuing Studies (TECH 43)</span><span class="marquee__item">Research Affiliate — Value Chain Innovation Initiative, Stanford GSB</span><span class="marquee__item">3× Forbes-recognised founder (Poland)</span><span class="marquee__item">170-person company bootstrapped</span><span class="marquee__item">~$10M revenue, zero outside capital</span><span class="marquee__item">Granted patent — PL247981B1</span><span class="marquee__item">Bias in Text Embedding Models — arXiv:2406.12138</span></div></div>
 <div class="section section--cream" style="border-top:0">
@@ -288,6 +173,47 @@
 <div class="lightbox" hidden>
   <button class="lightbox__close" type="button" aria-label="Close photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   <div><img src="" alt=""><p></p></div>
+</div>
+</section><section class="section section--cool" id="capabilities">
+<div class="shell">
+  <div class="section__head" data-reveal>
+    <p class="eyebrow">Engineering</p>
+    <h2 class="section__title">What I build</h2>
+    <p class="section__lede">Six systems that come up again and again across legal, clinical, industrial and education settings. Different domains, the same engineering problems underneath.</p>
+  </div>
+  <div class="grid grid--3">
+    <article class="card" data-reveal data-reveal-delay="0">
+  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg></div>
+  <h3>Agentic workflow automation</h3>
+  <p>Multi-step agents that take a real business process end to end — read the input, call your systems, make the call they’re allowed to make, and escalate the rest. Scoped so the blast radius of a mistake is always known in advance.</p>
+  <div class="card__chips"><span class="chip">LangGraph</span><span class="chip">Tool calling</span><span class="chip">MCP</span></div>
+</article><article class="card" data-reveal data-reveal-delay="70">
+  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+  <h3>Retrieval &amp; document intelligence</h3>
+  <p>Search and question-answering over your own document estate, with citations. Contracts, clinical notes, filings, inspection reports — extracted, structured, and made answerable without shipping your data to somebody else’s training set.</p>
+  <div class="card__chips"><span class="chip">pgvector</span><span class="chip">Rerankers</span><span class="chip">OCR</span></div>
+</article><article class="card" data-reveal data-reveal-delay="140">
+  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></div>
+  <h3>Evaluation &amp; observability</h3>
+  <p>The discipline that separates a product from a demo. Golden datasets, offline evals wired into CI, online tracing and drift alerts. You get a number for “is it working” instead of a vibe.</p>
+  <div class="card__chips"><span class="chip">Eval harnesses</span><span class="chip">Tracing</span><span class="chip">Golden sets</span></div>
+</article><article class="card" data-reveal data-reveal-delay="210">
+  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></svg></div>
+  <h3>Model selection &amp; fine-tuning</h3>
+  <p>Benchmarking your actual task across frontier and open-weight models, then routing by cost, latency and accuracy. Fine-tuning and distillation where the maths works out — and an honest “you don’t need this” where it doesn’t.</p>
+  <div class="card__chips"><span class="chip">LoRA</span><span class="chip">vLLM</span><span class="chip">Distillation</span></div>
+</article><article class="card" data-reveal data-reveal-delay="280">
+  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6l8-3 8 3z"/></svg></div>
+  <h3>Security, privacy &amp; guardrails</h3>
+  <p>PII detection and redaction, tenant isolation, prompt-injection defence, and audit logging designed for people who will one day be asked to explain a decision. I’ve shipped AI in regulated, high-stakes settings and built for that from day one.</p>
+  <div class="card__chips"><span class="chip">PII redaction</span><span class="chip">Isolation</span><span class="chip">Audit trails</span></div>
+</article><article class="card" data-reveal data-reveal-delay="350">
+  <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.5-9.17 4.16a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.16a2 2 0 0 1-1.66 0L2 17.5"/></svg></div>
+  <h3>Integration &amp; handover</h3>
+  <p>It runs in your cloud, behind your SSO, in your CI — not on a laptop under my desk. Every engagement ends with runbooks, architecture docs, and a team I’ve trained to extend it without me.</p>
+  <div class="card__chips"><span class="chip">AWS / GCP</span><span class="chip">SSO</span><span class="chip">Runbooks</span></div>
+</article>
+  </div>
 </div>
 </section><section class="section section--ink" id="research">
 <div class="shell">
@@ -441,6 +367,79 @@
   <div class="portfolio__foot" data-reveal>
     <p>Some engagements are under NDA and can’t be described here. Happy to walk through the architecture of any of them on a call.</p>
     <a class="btn btn--ghost" href="/cv/">Full CV <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+</section><section class="section section--cool" id="stack">
+<div class="shell">
+  <div class="section__head" data-reveal>
+    <p class="eyebrow">How I build</p>
+    <h2 class="section__title">Six layers decide whether AI survives contact with production.</h2>
+    <p class="section__lede">Nearly every enterprise AI project that fails, fails in the same place: the gap between a demo that impresses a room and a system that runs on a Tuesday morning without anyone watching. These are the layers that gap is made of. I build all six.</p>
+  </div>
+  <div class="stackdiag">
+    <div class="layers" role="tablist" aria-label="The AI stack" data-reveal><button type="button" class="layer" role="tab" aria-selected="false"
+  data-num="06" data-name="Interface"
+  data-headline="Software people use without being trained to use it." data-detail="The best model in the world is worthless behind a UI nobody opens. I ship AI into the tools your team already lives in — the internal dashboard, the CRM, Slack, the case management system — so adoption is the default rather than a change-management programme."
+  data-stack="React|TypeScript|Streaming UI|Slack / Teams|REST">
+  <span class="layer__num">06</span>
+  <span>
+    <span class="layer__name">Interface</span>
+    <span class="layer__hint">Where people actually meet the system</span>
+  </span>
+</button><button type="button" class="layer" role="tab" aria-selected="false"
+  data-num="05" data-name="Agents &amp; orchestration"
+  data-headline="State machines, not prompt spaghetti." data-detail="Multi-step agents that plan, call your internal tools, recover from failure, and know exactly when to stop and ask a human. Built as explicit, inspectable graphs — so when something goes wrong you can point at the node that did it instead of re-reading a 4,000-token prompt."
+  data-stack="LangGraph|Tool calling|MCP|Queues|Human-in-the-loop">
+  <span class="layer__num">05</span>
+  <span>
+    <span class="layer__name">Agents &amp; orchestration</span>
+    <span class="layer__hint">Planning, tool use, human handoff</span>
+  </span>
+</button><button type="button" class="layer" role="tab" aria-selected="false"
+  data-num="04" data-name="Retrieval &amp; memory"
+  data-headline="Answers with citations, not confident guesses." data-detail="Hybrid search over your own corpus — contracts, tickets, filings, shift reports — with reranking, chunking that respects document structure, and citations on every claim. If the system can’t ground an answer, it says so. That property is what makes it usable in a regulated review."
+  data-stack="pgvector|Hybrid BM25|Rerankers|OCR|Knowledge graphs">
+  <span class="layer__num">04</span>
+  <span>
+    <span class="layer__name">Retrieval &amp; memory</span>
+    <span class="layer__hint">Your documents, made answerable</span>
+  </span>
+</button><button type="button" class="layer" role="tab" aria-selected="false"
+  data-num="03" data-name="Models"
+  data-headline="The right model per task, not one model for everything." data-detail="Frontier models where reasoning matters, small open-weight models where volume and latency matter, fine-tuning only where it demonstrably earns its cost. Structured outputs with schema validation, so downstream code never has to parse prose."
+  data-stack="Claude|Open weights|LoRA / PEFT|vLLM|Structured output">
+  <span class="layer__num">03</span>
+  <span>
+    <span class="layer__name">Models</span>
+    <span class="layer__hint">Routing, fine-tuning, structured output</span>
+  </span>
+</button><button type="button" class="layer" role="tab" aria-selected="false"
+  data-num="02" data-name="Evaluation &amp; guardrails"
+  data-headline="If quality regresses, a dashboard tells you — not a customer." data-detail="Every system ships with a golden dataset, an offline eval suite in CI, and online tracing. Plus the unglamorous safety layer: PII detection and redaction, prompt-injection defence, tenant isolation, cost and latency budgets, and an audit trail that survives a compliance review."
+  data-stack="Eval harnesses|Tracing|Red-teaming|PII redaction|CI">
+  <span class="layer__num">02</span>
+  <span>
+    <span class="layer__name">Evaluation &amp; guardrails</span>
+    <span class="layer__hint">How you know it still works</span>
+  </span>
+</button><button type="button" class="layer" role="tab" aria-selected="false"
+  data-num="01" data-name="Data &amp; infrastructure"
+  data-headline="Boring, observable, and yours to operate." data-detail="Ingestion pipelines, vector and relational stores, deployment into your cloud and your identity provider, monitoring, and cost controls. Handover includes runbooks and a team that can actually run it — the goal is your independence, not a permanent dependency on me."
+  data-stack="Python|Docker|AWS / GCP|Airflow|Observability">
+  <span class="layer__num">01</span>
+  <span>
+    <span class="layer__name">Data &amp; infrastructure</span>
+    <span class="layer__hint">The part nobody demos</span>
+  </span>
+</button></div>
+    <div class="layerpanel" role="tabpanel" aria-live="polite" data-reveal data-reveal-delay="120">
+      <div class="layerpanel__body">
+        <p class="layerpanel__tag">Layer 06 · Interface</p>
+        <h3>Software people use without being trained to use it.</h3>
+        <p>The best model in the world is worthless behind a UI nobody opens. I ship AI into the tools your team already lives in — the internal dashboard, the CRM, Slack, the case management system — so adoption is the default rather than a change-management programme.</p>
+        <div class="layerpanel__chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Streaming UI</span><span class="chip">Slack / Teams</span><span class="chip">REST</span></div>
+      </div>
+    </div>
   </div>
 </div>
 </section><section class="contact" id="contact">
